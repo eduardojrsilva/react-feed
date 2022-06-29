@@ -1,11 +1,12 @@
 import { createGlobalStyle } from 'styled-components';
+import { theme } from './theme';
 
 export const GlobalStyle = createGlobalStyle`
   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: ${({ theme }) => theme.fonts.roboto}
+    font-family: ${theme.fonts.roboto}
   }
   #root {
     isolation: isolate;
@@ -26,6 +27,7 @@ export const GlobalStyle = createGlobalStyle`
   body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background: ${theme.colors.gray900};
   }
   a,
   button,

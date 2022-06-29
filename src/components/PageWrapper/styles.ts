@@ -1,0 +1,13 @@
+import styled from 'styled-components';
+
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  max-width: 80%;
+  margin: 0 auto;
+  margin-top: 30px;
+
+  @media (max-width: 1100px) {
+    max-width: 90%;
+  }
+`;
