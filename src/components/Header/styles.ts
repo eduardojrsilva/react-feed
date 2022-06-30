@@ -13,6 +13,10 @@ export const StyledHeader = styled.header`
     margin: 0 auto;
     padding: 20px;
 
+    h1 {
+      color: ${theme.colors.gray100};
+    }
+
     button {
       background: transparent;
       color: inherit;

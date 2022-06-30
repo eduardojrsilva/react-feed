@@ -1,10 +1,13 @@
+import { Link } from 'react-router-dom';
 import { StyledHeader } from './styles';
 
 const Header: React.FC = () => {
   return (
     <StyledHeader>
       <div>
-        <h1>React Feed</h1>
+        <Link to="/">
+          <h1>React Feed</h1>
+        </Link>
         <button type="button">Sair</button>
       </div>
     </StyledHeader>

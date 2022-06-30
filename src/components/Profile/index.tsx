@@ -1,6 +1,6 @@
 import { User } from '../../utils/Mocks';
 import Avatar from '../Avatar';
-import { Container, Content, ViewProfileContainer, Wallpaper } from './styles';
+import { Container, Content, StyledLink, ViewProfileContainer, Wallpaper } from './styles';
 
 interface ProfileProps {
   user: User;
@@ -16,7 +16,7 @@ const Profile: React.FC<ProfileProps> = ({ user }) => {
         <span>{user.role}</span>
       </Content>
       <ViewProfileContainer>
-        <button type="button">Visualizar Perfil</button>
+        <StyledLink to="/profile">Visualizar Perfil</StyledLink>
       </ViewProfileContainer>
     </Container>
   );

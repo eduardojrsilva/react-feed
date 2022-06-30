@@ -1,3 +1,4 @@
+import { convertPixelToRem } from 'css-blocks-styled-components';
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
@@ -10,4 +11,8 @@ export const Wrapper = styled.div`
   @media (max-width: 1100px) {
     max-width: 90%;
   }
+`;
+
+export const Space = styled.div`
+  height: ${convertPixelToRem(20)};
 `;

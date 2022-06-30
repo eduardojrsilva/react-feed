@@ -1,4 +1,5 @@
 import { convertPixelToRem, flex } from 'css-blocks-styled-components';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { theme } from '../../styles/theme';
 
@@ -41,25 +42,25 @@ export const ViewProfileContainer = styled.div`
   border-top: 1px solid ${theme.colors.gray600};
   margin-top: 20px;
   padding: 20px;
+`;
 
-  button {
-    padding: 15px 25px;
-    border-radius: 8px;
-    border: 1px solid ${theme.colors.green500};
-    background: transparent;
+export const StyledLink = styled(Link)`
+  padding: 15px 25px;
+  border-radius: 8px;
+  border: 1px solid ${theme.colors.green500};
+  background: transparent;
 
-    color: ${theme.colors.green500};
-    font-weight: bold;
+  color: ${theme.colors.green500};
+  font-weight: bold;
 
-    transition: background-color 0.1s;
+  transition: background-color 0.1s;
 
-    :hover {
-      background-color: ${theme.colors.green500};
-      color: ${theme.colors.white};
-    }
+  :hover {
+    background-color: ${theme.colors.green500};
+    color: ${theme.colors.white};
+  }
 
-    @media (max-width: 1100px) {
-      padding: 5px 15px;
-    }
+  @media (max-width: 1100px) {
+    padding: 5px 15px;
   }
 `;
