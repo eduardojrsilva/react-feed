@@ -1,5 +1,5 @@
 import { ChangeEvent, useState } from 'react';
-import { Post, USERS } from '../../../utils/Mocks';
+import { Post, POSTS, USERS } from '../../../utils/Mocks';
 import BagOfWords from '../../BagOfWords';
 import { Input } from '../../Input/styles';
 
@@ -28,6 +28,7 @@ const NewPost: React.FC<NewPostProps> = ({ posts, setPosts }) => {
     };
 
     setPosts([post, ...posts]);
+    POSTS.unshift(post);
 
     setPostContent('');
     setUrl('');
