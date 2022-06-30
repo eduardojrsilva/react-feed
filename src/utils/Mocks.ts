@@ -26,7 +26,7 @@ export const USERS: User[] = [
   },
   {
     name: 'João',
-    role: 'Back-end Developer',
+    role: 'Designer',
     avatarUrl: 'https://github.com/joao.png',
     wallpaperUrl:
       'https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Y2Fyc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=250&q=60',
@@ -43,7 +43,7 @@ export const POSTS: Post[] = [
       'Acabei de subir mais um projeto no meu portifa. É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀',
     ],
     publishedAt: 'há 1h atrás',
-    link: 'jane.design/doctorcare',
+    link: 'eduardo.silva/doctorcare',
     tags: ['novoprojeto', 'nlw', 'rocketseat'],
   },
   {
@@ -53,7 +53,7 @@ export const POSTS: Post[] = [
       'Finalmente finalizei meu novo site/portfólio. Foi um baita desafio criar todo o design e codar na unha, mas consegui 💪🏻',
     ],
     publishedAt: 'há 3h atrás',
-    link: 'devonlane.design',
+    link: 'joao.design',
     tags: ['uiux', 'userexperience'],
   },
 ];

@@ -69,7 +69,7 @@ const ProfilePage: React.FC = () => {
                   {userPosts.map((post, index) => (
                     <>
                       <Post post={post} />
-                      {POSTS.length + 1 !== index && <Separator />}
+                      {userPosts.length !== index + 1 && <Separator />}
                     </>
                   ))}
                 </UserPosts>
