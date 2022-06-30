@@ -1,3 +1,4 @@
+import { convertPixelToRem } from 'css-blocks-styled-components';
 import styled from 'styled-components';
 import { theme } from '../../styles/theme';
 
@@ -10,8 +11,8 @@ export const StyledHeader = styled.header`
     align-items: center;
     justify-content: space-between;
     max-width: 80%;
+    height: ${convertPixelToRem(80)};
     margin: 0 auto;
-    padding: 20px;
 
     h1 {
       color: ${theme.colors.gray100};

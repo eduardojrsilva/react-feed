@@ -6,13 +6,9 @@ export const Wrapper = styled.div`
   flex-direction: column;
   max-width: 80%;
   margin: 0 auto;
-  margin-top: 30px;
+  margin-top: ${convertPixelToRem(30)};
 
   @media (max-width: 1100px) {
     max-width: 90%;
   }
-`;
-
-export const Space = styled.div`
-  height: ${convertPixelToRem(20)};
 `;

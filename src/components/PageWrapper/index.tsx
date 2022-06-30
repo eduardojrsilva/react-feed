@@ -1,5 +1,5 @@
 import Header from '../Header';
-import { Space, Wrapper } from './styles';
+import { Wrapper } from './styles';
 
 interface PageWrapperProps {
   children: React.ReactNode;
@@ -10,7 +10,6 @@ const PageWrapper: React.FC<PageWrapperProps> = ({ children }) => {
     <>
       <Header />
       <Wrapper>{children}</Wrapper>
-      <Space />
     </>
   );
 };
