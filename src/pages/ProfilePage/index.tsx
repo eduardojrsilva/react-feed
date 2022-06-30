@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { FiEdit } from 'react-icons/fi';
 import Avatar from '../../components/Avatar';
+import NewPost from '../../components/Feed/NewPost';
 import Post from '../../components/Feed/Post';
 import PageWrapper from '../../components/PageWrapper';
 import { Post as PostType, POSTS, USERS } from '../../utils/Mocks';
@@ -43,7 +44,13 @@ const ProfilePage: React.FC = () => {
             </button>
           </UserInfo>
 
-          {userPosts && (
+          <Separator />
+
+          <NewPost posts={userPosts} setPosts={setUserPosts} />
+
+          {!userPosts.length ? (
+            <span>Você ainda não tem nenhuma publicação</span>
+          ) : (
             <UserPosts>
               <strong>Suas postagens:</strong>
 

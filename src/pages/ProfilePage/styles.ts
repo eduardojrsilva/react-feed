@@ -15,9 +15,19 @@ export const Wallpaper = styled.img`
 `;
 
 export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
   width: 90%;
   margin: 0 auto;
   color: ${theme.colors.gray100};
+
+  > span {
+    display: block;
+    text-align: center;
+    margin: 50px 0;
+    color: ${theme.colors.gray400};
+  }
 `;
 
 export const UserInfo = styled.div`
@@ -73,7 +83,6 @@ export const UserPosts = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  margin-top: 30px;
   border-top: 1px solid ${theme.colors.gray600};
 
   > strong {
