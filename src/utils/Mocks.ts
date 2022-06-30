@@ -8,7 +8,7 @@ export interface User {
 
 export interface Post {
   owner: User;
-  content: string;
+  content: string[];
   publishedAt: string;
   link?: string;
   tags?: string[];
@@ -38,16 +38,20 @@ export const USERS: User[] = [
 export const POSTS: Post[] = [
   {
     owner: USERS[0],
-    content:
-      'Fala galeraa 👋 Acabei de subir mais um projeto no meu portifa. É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀',
+    content: [
+      'Fala galeraa 👋',
+      'Acabei de subir mais um projeto no meu portifa. É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀',
+    ],
     publishedAt: 'há 1h atrás',
     link: 'jane.design/doctorcare',
     tags: ['novoprojeto', 'nlw', 'rocketseat'],
   },
   {
-    owner: USERS[0],
-    content:
-      'Fala pessoal 👋 Finalmente finalizei meu novo site/portfólio. Foi um baita desafio criar todo o design e codar na unha, mas consegui 💪🏻',
+    owner: USERS[1],
+    content: [
+      'Fala pessoal 👋',
+      'Finalmente finalizei meu novo site/portfólio. Foi um baita desafio criar todo o design e codar na unha, mas consegui 💪🏻',
+    ],
     publishedAt: 'há 3h atrás',
     link: 'devonlane.design',
     tags: ['uiux', 'userexperience'],

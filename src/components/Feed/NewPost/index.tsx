@@ -22,12 +22,12 @@ const NewPost: React.FC<NewPostProps> = ({ posts, setPosts }) => {
     const post: Post = {
       owner: USERS[0],
       publishedAt: String(Date.now()),
-      content: postContent,
+      content: postContent.split('\n'),
       link: url,
       tags,
     };
 
-    setPosts([...posts, post]);
+    setPosts([post, ...posts]);
 
     setPostContent('');
     setUrl('');
@@ -67,7 +67,12 @@ const NewPost: React.FC<NewPostProps> = ({ posts, setPosts }) => {
           {isUrlOn && (
             <InputWrapper>
               <label htmlFor="url">URL: </label>
-              <Input id="url" value={url} onChange={handleChangeUrl} />
+              <Input
+                id="url"
+                value={url}
+                onChange={handleChangeUrl}
+                placeholder="www.example.com"
+              />
               <button type="button" onClick={handleToggleUrl}>
                 x
               </button>

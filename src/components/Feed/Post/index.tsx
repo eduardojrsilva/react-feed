@@ -30,7 +30,12 @@ const Post: React.FC<PostProps> = ({ post }) => {
         <time>{post.publishedAt}</time>
       </PostHeader>
       <PostContent>
-        {post.content}
+        {post.content.map((line) => (
+          <>
+            <span>{line}</span>
+            <br />
+          </>
+        ))}
         {(post.tags || post.link) && (
           <Links>
             {post.link && (
