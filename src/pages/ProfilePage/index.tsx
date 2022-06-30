@@ -5,6 +5,7 @@ import NewPost from '../../components/Feed/NewPost';
 import Post from '../../components/Feed/Post';
 import PageWrapper from '../../components/PageWrapper';
 import { Post as PostType, POSTS, USERS } from '../../utils/Mocks';
+import EditUserInfo from './EditUserInfo';
 import {
   AvatarNameRoleWrapper,
   Container,
@@ -18,7 +19,12 @@ import {
 const user = USERS[0];
 
 const ProfilePage: React.FC = () => {
+  const [editMode, setEditMode] = useState(false);
   const [userPosts, setUserPosts] = useState<PostType[]>([]);
+
+  const handleEditMode = (): void => {
+    setEditMode(!editMode);
+  };
 
   useEffect(() => {
     setUserPosts(POSTS.filter((post) => post.owner === user));
@@ -38,30 +44,37 @@ const ProfilePage: React.FC = () => {
               </div>
             </AvatarNameRoleWrapper>
 
-            <button type="button">
-              <FiEdit />
-              Editar informações
-            </button>
+            {!editMode && (
+              <button type="button" onClick={handleEditMode}>
+                <FiEdit />
+                Editar informações
+              </button>
+            )}
           </UserInfo>
 
           <Separator />
 
-          <NewPost posts={userPosts} setPosts={setUserPosts} />
-
-          {!userPosts.length ? (
-            <span>Você ainda não tem nenhuma publicação</span>
+          {editMode ? (
+            <EditUserInfo user={user} handleEditMode={handleEditMode} />
           ) : (
-            <UserPosts>
-              <strong>Suas postagens:</strong>
+            <>
+              <NewPost posts={userPosts} setPosts={setUserPosts} />
 
-              {userPosts.map((post, index) => (
-                <>
-                  <Post post={post} />
-                  {/* <Separator /> */}
-                  {POSTS.length + 1 !== index && <Separator />}
-                </>
-              ))}
-            </UserPosts>
+              {!userPosts.length ? (
+                <span>Você ainda não tem nenhuma publicação</span>
+              ) : (
+                <UserPosts>
+                  <strong>Suas postagens:</strong>
+
+                  {userPosts.map((post, index) => (
+                    <>
+                      <Post post={post} />
+                      {POSTS.length + 1 !== index && <Separator />}
+                    </>
+                  ))}
+                </UserPosts>
+              )}
+            </>
           )}
         </Wrapper>
       </Container>
