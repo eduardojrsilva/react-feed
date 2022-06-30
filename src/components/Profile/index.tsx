@@ -16,7 +16,7 @@ const Profile: React.FC<ProfileProps> = ({ user }) => {
         <span>{user.role}</span>
       </Content>
       <ViewProfileContainer>
-        <StyledLink to="/profile">Visualizar Perfil</StyledLink>
+        <StyledLink to={`/profile/${user.name}`}>Visualizar Perfil</StyledLink>
       </ViewProfileContainer>
     </Container>
   );

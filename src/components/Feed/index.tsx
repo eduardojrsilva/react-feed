@@ -11,7 +11,7 @@ const Feed: React.FC = () => {
     <Container>
       <NewPost posts={posts} setPosts={setPosts} />
       {posts.map((post) => (
-        <Post post={post} />
+        <Post post={post} linkToProfile />
       ))}
     </Container>
   );

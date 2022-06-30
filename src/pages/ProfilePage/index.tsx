@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { FiEdit } from 'react-icons/fi';
+import { useParams } from 'react-router-dom';
 import Avatar from '../../components/Avatar';
 import NewPost from '../../components/Feed/NewPost';
 import Post from '../../components/Feed/Post';
 import PageWrapper from '../../components/PageWrapper';
-import { Post as PostType, POSTS, USERS } from '../../utils/Mocks';
+import { Post as PostType, POSTS, User, USERS } from '../../utils/Mocks';
 import EditUserInfo from './EditUserInfo';
 import {
   AvatarNameRoleWrapper,
@@ -16,9 +17,13 @@ import {
   Wrapper,
 } from './styles';
 
-const user = USERS[0];
+interface Params {
+  username: string;
+}
 
 const ProfilePage: React.FC = () => {
+  const { username }: Params = useParams();
+  const [user, setUser] = useState<User>(USERS.find(({ name }) => username === name) || USERS[0]);
   const [editMode, setEditMode] = useState(false);
   const [userPosts, setUserPosts] = useState<PostType[]>([]);
 
@@ -28,7 +33,7 @@ const ProfilePage: React.FC = () => {
 
   useEffect(() => {
     setUserPosts(POSTS.filter((post) => post.owner === user));
-  }, []);
+  }, [user, username]);
 
   return (
     <PageWrapper>

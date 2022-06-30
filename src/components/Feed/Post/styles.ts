@@ -35,6 +35,10 @@ export const NameRoleWrapper = styled.div`
   gap: 5px;
   margin-left: 1rem;
 
+  strong {
+    color: ${theme.colors.gray100};
+  }
+
   span {
     font-size: 14px;
     color: ${theme.colors.gray400};

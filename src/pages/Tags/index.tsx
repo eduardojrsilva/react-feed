@@ -34,7 +34,7 @@ const Tags: React.FC = () => {
           <>
             {posts.map((post, index) => (
               <>
-                <Post post={post} />
+                <Post post={post} linkToProfile />
                 {posts.length !== index + 1 && <Separator />}
               </>
             ))}

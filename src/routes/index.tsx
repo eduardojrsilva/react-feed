@@ -10,7 +10,7 @@ const AppRoutes: React.FC = () => {
   return (
     <Switch>
       <Route path="/" exact component={Dashboard} />
-      <Route path="/profile" exact component={ProfilePage} />
+      <Route path="/profile/:username" exact component={ProfilePage} />
       <Route path="/tags/:tag" exact component={Tags} />
     </Switch>
   );

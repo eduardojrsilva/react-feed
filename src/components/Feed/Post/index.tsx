@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Post as PostType } from '../../../utils/Mocks';
 import Avatar from '../../Avatar';
 import { TextArea } from '../../TextArea/styles';
@@ -14,16 +15,23 @@ import {
 
 interface PostProps {
   post: PostType;
+  linkToProfile?: boolean;
 }
 
-const Post: React.FC<PostProps> = ({ post }) => {
+const Post: React.FC<PostProps> = ({ post, linkToProfile = false }) => {
   return (
     <Container>
       <PostHeader>
         <Identification>
           <Avatar avatarUrl={post.owner.avatarUrl} />
           <NameRoleWrapper>
-            <strong>{post.owner.name}</strong>
+            {linkToProfile ? (
+              <Link to={`../profile/${post.owner.name}`}>
+                <strong>{post.owner.name}</strong>
+              </Link>
+            ) : (
+              <strong>{post.owner.name}</strong>
+            )}
             <span>{post.owner.role}</span>
           </NameRoleWrapper>
         </Identification>
