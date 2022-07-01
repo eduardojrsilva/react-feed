@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import { FiMessageCircle, FiThumbsUp } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import { Post as PostType } from '../../../utils/Mocks';
 import Avatar from '../../Avatar';
@@ -6,6 +8,7 @@ import {
   CommentsContainer,
   Container,
   Identification,
+  InteractionsBar,
   Links,
   NameRoleWrapper,
   PostContent,
@@ -19,6 +22,17 @@ interface PostProps {
 }
 
 const Post: React.FC<PostProps> = ({ post, linkToProfile = false }) => {
+  const [activeLike, setActiveLike] = useState(false);
+  const [activeComment, setActiveComment] = useState(false);
+
+  const handleLike = (): void => {
+    setActiveLike(!activeLike);
+  };
+
+  const handleComment = (): void => {
+    setActiveComment(!activeComment);
+  };
+
   return (
     <Container>
       <PostHeader>
@@ -60,10 +74,30 @@ const Post: React.FC<PostProps> = ({ post, linkToProfile = false }) => {
           </Links>
         )}
       </PostContent>
-      <CommentsContainer>
-        <strong>Deixe seu feedback</strong>
-        <TextArea rows={3} placeholder="Escreva um comentário..." />
-      </CommentsContainer>
+
+      <InteractionsBar $activeLike={activeLike}>
+        <div>
+          <button type="button" onClick={handleLike}>
+            <FiThumbsUp />
+          </button>
+
+          <span>{post.likesCount}</span>
+        </div>
+        <div>
+          <button type="button" onClick={handleComment}>
+            <FiMessageCircle />
+          </button>
+
+          <span>{post.comments.length}</span>
+        </div>
+      </InteractionsBar>
+
+      {activeComment && (
+        <CommentsContainer>
+          <strong>Deixe seu feedback</strong>
+          <TextArea rows={3} placeholder="Escreva um comentário..." />
+        </CommentsContainer>
+      )}
     </Container>
   );
 };

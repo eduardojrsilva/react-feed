@@ -26,6 +26,8 @@ const NewPost: React.FC<NewPostProps> = ({ posts, setPosts, profile = false }) =
       content: postContent.split('\n'),
       link: url,
       tags,
+      likesCount: 0,
+      comments: [],
     };
 
     setPosts([post, ...posts]);

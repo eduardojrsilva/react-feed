@@ -12,6 +12,15 @@ export interface Post {
   publishedAt: string;
   link?: string;
   tags?: string[];
+  likesCount: number;
+  comments: Comment[];
+}
+
+export interface Comment {
+  owner: User;
+  message: string;
+  publishedAt: string;
+  likesCount: number;
 }
 
 export const USERS: User[] = [
@@ -35,6 +44,21 @@ export const USERS: User[] = [
   },
 ];
 
+export const COMMENTS: Comment[] = [
+  {
+    owner: USERS[0],
+    message: 'Parabéns, ficou ótimo!',
+    publishedAt: 'há 20min atrás',
+    likesCount: 3,
+  },
+  {
+    owner: USERS[1],
+    message: 'Que legal!',
+    publishedAt: 'há 5min atrás',
+    likesCount: 1,
+  },
+];
+
 export const POSTS: Post[] = [
   {
     owner: USERS[0],
@@ -45,6 +69,8 @@ export const POSTS: Post[] = [
     publishedAt: 'há 1h atrás',
     link: 'eduardo.silva/doctorcare',
     tags: ['novoprojeto', 'nlw', 'rocketseat'],
+    likesCount: 128,
+    comments: [COMMENTS[1]],
   },
   {
     owner: USERS[1],
@@ -55,5 +81,7 @@ export const POSTS: Post[] = [
     publishedAt: 'há 3h atrás',
     link: 'joao.design',
     tags: ['uiux', 'userexperience'],
+    likesCount: 72,
+    comments: [COMMENTS[0]],
   },
 ];

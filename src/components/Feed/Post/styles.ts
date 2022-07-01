@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { theme } from '../../../styles/theme';
 
 export const Container = styled.div`
@@ -76,6 +76,46 @@ export const Tags = styled.div`
   display: flex;
   gap: 5px;
   margin-top: 30px;
+`;
+
+interface InteractionsBarProps {
+  $activeLike: boolean;
+}
+
+export const InteractionsBar = styled.div<InteractionsBarProps>`
+  display: flex;
+  gap: 20px;
+
+  div {
+    display: flex;
+    gap: 5px;
+
+    span {
+      color: ${theme.colors.gray100};
+    }
+
+    button {
+      background: transparent;
+      border: 0;
+      color: ${theme.colors.gray100};
+
+      :hover {
+        color: ${theme.colors.green300};
+      }
+    }
+
+    :first-of-type {
+      ${({ $activeLike }) =>
+        $activeLike &&
+        css`
+          button {
+            svg {
+              color: ${theme.colors.green500};
+            }
+          }
+        `}
+    }
+  }
 `;
 
 export const CommentsContainer = styled.div`
