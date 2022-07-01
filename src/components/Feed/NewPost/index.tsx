@@ -69,24 +69,28 @@ const NewPost: React.FC<NewPostProps> = ({ posts, setPosts, profile = false }) =
           {isUrlOn && (
             <InputWrapper>
               <label htmlFor="url">URL: </label>
-              <Input
-                id="url"
-                value={url}
-                onChange={handleChangeUrl}
-                placeholder="www.example.com"
-              />
-              <button type="button" onClick={handleToggleUrl}>
-                x
-              </button>
+              <div>
+                <Input
+                  id="url"
+                  value={url}
+                  onChange={handleChangeUrl}
+                  placeholder="www.example.com"
+                />
+                <button type="button" onClick={handleToggleUrl}>
+                  x
+                </button>
+              </div>
             </InputWrapper>
           )}
           {isTagsOn && (
             <InputWrapper>
               <label htmlFor="bag-of-words">Tags: </label>
-              <BagOfWords tags={tags} setTags={setTags} />
-              <button type="button" onClick={handleToggleTags}>
-                x
-              </button>
+              <div>
+                <BagOfWords tags={tags} setTags={setTags} />
+                <button type="button" onClick={handleToggleTags}>
+                  x
+                </button>
+              </div>
             </InputWrapper>
           )}
           <ButtonsContainer>

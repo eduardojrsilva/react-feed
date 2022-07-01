@@ -44,6 +44,11 @@ export const ButtonsContainer = styled.div`
       margin-left: 20px;
     }
   }
+
+  @media (max-width: 450px) {
+    flex-direction: column;
+    gap: 10px;
+  }
 `;
 
 export const Button = styled.button`
@@ -72,17 +77,34 @@ export const InputWrapper = styled.div`
     width: ${convertPixelToRem(40)};
   }
 
-  button {
-    background: ${theme.colors.gray600};
-    color: ${theme.colors.gray400};
-    border: 0;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
+  > div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
 
-    :hover {
-      background: ${theme.colors.red500};
-      color: ${theme.colors.white};
+    button {
+      flex-shrink: 0;
+      background: ${theme.colors.gray600};
+      color: ${theme.colors.gray400};
+      border: 0;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+
+      :hover {
+        background: ${theme.colors.red500};
+        color: ${theme.colors.white};
+      }
+    }
+  }
+
+  @media (max-width: 450px) {
+    flex-direction: column;
+    gap: 5px;
+
+    label {
+      align-self: flex-start;
     }
   }
 `;
