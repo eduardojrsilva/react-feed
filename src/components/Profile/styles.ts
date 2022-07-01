@@ -12,6 +12,10 @@ export const Container = styled.div`
   @media (max-width: 1100px) {
     width: 200px;
   }
+
+  @media (max-width: 850px) {
+    display: none;
+  }
 `;
 
 export const Wallpaper = styled.img`

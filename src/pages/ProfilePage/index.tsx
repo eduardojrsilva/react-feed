@@ -5,7 +5,7 @@ import Avatar from '../../components/Avatar';
 import NewPost from '../../components/Feed/NewPost';
 import Post from '../../components/Feed/Post';
 import PageWrapper from '../../components/PageWrapper';
-import { Post as PostType, POSTS, User, USERS } from '../../utils/Mocks';
+import { Post as PostType, POSTS, USERS } from '../../utils/Mocks';
 import EditUserInfo from './EditUserInfo';
 import {
   AvatarNameRoleWrapper,
@@ -23,9 +23,10 @@ interface Params {
 
 const ProfilePage: React.FC = () => {
   const { username }: Params = useParams();
-  const [user, setUser] = useState<User>(USERS.find(({ name }) => username === name) || USERS[0]);
   const [editMode, setEditMode] = useState(false);
   const [userPosts, setUserPosts] = useState<PostType[]>([]);
+
+  const user = USERS.find(({ name }) => username === name) || USERS[0];
 
   const handleEditMode = (): void => {
     setEditMode(!editMode);
@@ -63,7 +64,7 @@ const ProfilePage: React.FC = () => {
             <EditUserInfo user={user} handleEditMode={handleEditMode} />
           ) : (
             <>
-              <NewPost posts={userPosts} setPosts={setUserPosts} />
+              <NewPost posts={userPosts} setPosts={setUserPosts} profile />
 
               {!userPosts.length ? (
                 <span>Você ainda não tem nenhuma publicação</span>

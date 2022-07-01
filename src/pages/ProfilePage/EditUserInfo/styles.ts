@@ -12,10 +12,21 @@ export const EditInfo = styled.div`
     align-items: center;
     flex: 1;
   }
+
+  @media (max-width: 850px) {
+    div {
+      align-items: stretch;
+    }
+  }
 `;
 
 export const NameRoleWrapper = styled.div`
   gap: 40px;
+
+  @media (max-width: 850px) {
+    flex-direction: column;
+    gap: 20px;
+  }
 `;
 
 interface LabelInputWrapperProps {
@@ -28,6 +39,15 @@ export const LabelInputWrapper = styled.div<LabelInputWrapperProps>`
   label {
     white-space: nowrap;
     margin-right: ${convertPixelToRem(10)};
+  }
+
+  @media (max-width: 850px) {
+    flex-direction: column;
+
+    label {
+      align-self: flex-start;
+      margin-bottom: ${convertPixelToRem(5)};
+    }
   }
 
   ${({ $column }) =>
@@ -73,5 +93,9 @@ export const ButtonsContainer = styled.div`
         color: ${theme.colors.white};
       }
     }
+  }
+
+  @media (max-width: 850px) {
+    gap: 20px;
   }
 `;

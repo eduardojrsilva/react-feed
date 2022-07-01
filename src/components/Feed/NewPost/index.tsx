@@ -9,9 +9,10 @@ import { Button, ButtonsContainer, Container, InputWrapper } from './styles';
 interface NewPostProps {
   posts: Post[];
   setPosts: (posts: Post[]) => void;
+  profile?: boolean;
 }
 
-const NewPost: React.FC<NewPostProps> = ({ posts, setPosts }) => {
+const NewPost: React.FC<NewPostProps> = ({ posts, setPosts, profile = false }) => {
   const [postContent, setPostContent] = useState('');
   const [isUrlOn, setIsUrlOn] = useState(false);
   const [isTagsOn, setIsTagsOn] = useState(false);
@@ -56,7 +57,7 @@ const NewPost: React.FC<NewPostProps> = ({ posts, setPosts }) => {
   };
 
   return (
-    <Container>
+    <Container $profile={profile}>
       <TextArea
         rows={5}
         value={postContent}

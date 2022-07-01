@@ -10,6 +10,10 @@ export const Container = styled.div`
   width: 100%;
   padding: 20px;
   font-size: 16px;
+
+  @media (max-width: 450px) {
+    padding: 10px;
+  }
 `;
 
 export const PostHeader = styled.div`
@@ -21,6 +25,11 @@ export const PostHeader = styled.div`
   time {
     font-size: 14px;
     color: ${theme.colors.gray400};
+  }
+
+  @media (max-width: 450px) {
+    flex-direction: column;
+    gap: 10px;
   }
 `;
 

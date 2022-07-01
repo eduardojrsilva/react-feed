@@ -29,8 +29,22 @@ export const StyledHeader = styled.header`
       }
     }
 
+    img {
+      display: none;
+    }
+
     @media (max-width: 1100px) {
       max-width: 90%;
+    }
+
+    @media (max-width: 850px) {
+      button {
+        display: none;
+      }
+
+      img {
+        display: flex;
+      }
     }
   }
 `;

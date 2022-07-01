@@ -1,8 +1,12 @@
 import { convertPixelToRem } from 'css-blocks-styled-components';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { theme } from '../../../styles/theme';
 
-export const Container = styled.div`
+interface ContainerProps {
+  $profile: boolean;
+}
+
+export const Container = styled.div<ContainerProps>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,7 +14,11 @@ export const Container = styled.div`
   width: 100%;
   border-radius: 8px;
   background: ${theme.colors.gray800};
-  padding: 10px;
+  ${({ $profile }) =>
+    !$profile &&
+    css`
+      padding: 10px;
+    `}
 `;
 
 export const ButtonsContainer = styled.div`

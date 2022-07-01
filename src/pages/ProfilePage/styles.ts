@@ -12,6 +12,14 @@ export const Wallpaper = styled.img`
   height: ${convertPixelToRem(200)};
   border-radius: 8px 8px 0 0;
   object-fit: cover;
+
+  @media (max-width: 850px) {
+    height: ${convertPixelToRem(160)};
+  }
+
+  @media (max-width: 450px) {
+    height: ${convertPixelToRem(120)};
+  }
 `;
 
 export const Wrapper = styled.div`
@@ -55,6 +63,11 @@ export const UserInfo = styled.div`
       margin-right: 10px;
     }
   }
+
+  @media (max-width: 850px) {
+    flex-direction: column;
+    gap: 20px;
+  }
 `;
 
 export const AvatarNameRoleWrapper = styled.div`
@@ -76,6 +89,12 @@ export const AvatarNameRoleWrapper = styled.div`
       font-size: ${convertPixelToRem(16)};
       margin-top: 10px;
     }
+  }
+
+  @media (max-width: 850px) {
+    margin-top: -60px;
+    flex-direction: column;
+    gap: 0;
   }
 `;
 
