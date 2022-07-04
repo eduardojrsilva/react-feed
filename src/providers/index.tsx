@@ -4,6 +4,7 @@ import { ThemeProvider } from 'styled-components';
 
 import { GlobalStyle } from '../styles/global';
 import { theme } from '../styles/theme';
+import { AuthProvider } from './Auth';
 
 interface AppProviderProps {
   children: React.ReactNode;
@@ -14,7 +15,7 @@ const AppProvider: FC<AppProviderProps> = ({ children }) => {
     <BrowserRouter>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        {children}
+        <AuthProvider>{children}</AuthProvider>
       </ThemeProvider>
     </BrowserRouter>
   );
