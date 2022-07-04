@@ -1,5 +1,6 @@
-import { convertPixelToRem } from 'css-blocks-styled-components';
 import styled, { css } from 'styled-components';
+import { convertPixelToRem } from 'css-blocks-styled-components';
+
 import { theme } from '../../../styles/theme';
 
 export const Container = styled.div`

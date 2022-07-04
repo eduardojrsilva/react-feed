@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom';
-import { USERS } from '../../utils/Mocks';
+
 import Avatar from '../Avatar';
+
+import { USERS } from '../../utils/Mocks';
+
 import { StyledHeader } from './styles';
 
 const Header: React.FC = () => {

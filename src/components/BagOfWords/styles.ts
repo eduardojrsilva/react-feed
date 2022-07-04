@@ -1,5 +1,6 @@
-import { convertPixelToRem, getMargin, getScrollbarStyle } from 'css-blocks-styled-components';
 import styled from 'styled-components';
+import { convertPixelToRem, getMargin, getScrollbarStyle } from 'css-blocks-styled-components';
+
 import { theme } from '../../styles/theme';
 
 export const BagOfWordsContainer = styled.div`

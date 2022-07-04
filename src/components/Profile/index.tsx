@@ -1,5 +1,7 @@
-import { User } from '../../utils/Mocks';
 import Avatar from '../Avatar';
+
+import { User } from '../../utils/Mocks';
+
 import { Container, Content, StyledLink, ViewProfileContainer, Wallpaper } from './styles';
 
 interface ProfileProps {

@@ -1,12 +1,15 @@
+import { ChangeEvent, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { format, formatDistanceToNow } from 'date-fns';
 import pt from 'date-fns/locale/pt';
-import { ChangeEvent, useState } from 'react';
 import { FiMessageCircle, FiThumbsUp } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
-import { Comment as CommentType, Post as PostType, POSTS, USERS } from '../../../utils/Mocks';
+
 import Avatar from '../../Avatar';
-import { TextArea } from '../../TextArea/styles';
 import Comment from '../Comments';
+import { TextArea } from '../../TextArea/styles';
+
+import { Comment as CommentType, Post as PostType, POSTS, USERS } from '../../../utils/Mocks';
+
 import {
   CommentsContainer,
   Container,

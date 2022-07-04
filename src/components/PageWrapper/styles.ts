@@ -1,5 +1,5 @@
-import { convertPixelToRem } from 'css-blocks-styled-components';
 import styled from 'styled-components';
+import { convertPixelToRem } from 'css-blocks-styled-components';
 
 export const Wrapper = styled.div`
   display: flex;

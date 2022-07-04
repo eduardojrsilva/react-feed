@@ -1,7 +1,10 @@
 import { useState } from 'react';
-import { Post as PostType, POSTS } from '../../utils/Mocks';
+
 import NewPost from './NewPost';
 import Post from './Post';
+
+import { Post as PostType, POSTS } from '../../utils/Mocks';
+
 import { Container } from './styles';
 
 const Feed: React.FC = () => {

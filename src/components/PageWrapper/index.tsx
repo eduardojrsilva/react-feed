@@ -1,4 +1,5 @@
 import Header from '../Header';
+
 import { Wrapper } from './styles';
 
 interface PageWrapperProps {

@@ -1,5 +1,7 @@
 import { Input } from '../../../components/Input/styles';
+
 import { User } from '../../../utils/Mocks';
+
 import { ButtonsContainer, EditInfo, LabelInputWrapper, NameRoleWrapper } from './styles';
 
 interface EditUserInfoProps {

@@ -1,9 +1,11 @@
 import { ChangeEvent, useState } from 'react';
-import { Post, POSTS, USERS } from '../../../utils/Mocks';
+
 import BagOfWords from '../../BagOfWords';
 import { Input } from '../../Input/styles';
-
 import { TextArea } from '../../TextArea/styles';
+
+import { Post, POSTS, USERS } from '../../../utils/Mocks';
+
 import { Button, ButtonsContainer, Container, InputWrapper } from './styles';
 
 interface NewPostProps {

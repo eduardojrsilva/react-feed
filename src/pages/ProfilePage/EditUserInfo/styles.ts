@@ -1,5 +1,6 @@
-import { convertPixelToRem, flex } from 'css-blocks-styled-components';
 import styled, { css } from 'styled-components';
+import { convertPixelToRem, flex } from 'css-blocks-styled-components';
+
 import { theme } from '../../../styles/theme';
 
 export const EditInfo = styled.div`

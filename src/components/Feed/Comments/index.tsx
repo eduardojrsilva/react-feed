@@ -1,10 +1,13 @@
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { format, formatDistanceToNow } from 'date-fns';
 import pt from 'date-fns/locale/pt';
-import { useState } from 'react';
 import { FiThumbsUp, FiTrash2 } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
-import { Comment as CommentType } from '../../../utils/Mocks';
+
 import Avatar from '../../Avatar';
+
+import { Comment as CommentType } from '../../../utils/Mocks';
+
 import { CommentContainer, Container, Content, ContentHeader, LikeContainer } from './styles';
 
 interface CommentProps {

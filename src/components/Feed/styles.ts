@@ -1,5 +1,6 @@
-import { convertPixelToRem, getScrollbarStyle } from 'css-blocks-styled-components';
 import styled from 'styled-components';
+import { convertPixelToRem, getScrollbarStyle } from 'css-blocks-styled-components';
+
 import { theme } from '../../styles/theme';
 
 export const Container = styled.div`

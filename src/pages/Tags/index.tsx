@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+
 import Post from '../../components/Feed/Post';
 import PageWrapper from '../../components/PageWrapper';
+
 import { Post as PostType, POSTS } from '../../utils/Mocks';
+
 import { Container, Separator, Title } from './styles';
 
 interface Params {

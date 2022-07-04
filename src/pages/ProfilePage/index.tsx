@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react';
-import { FiEdit } from 'react-icons/fi';
 import { useParams } from 'react-router-dom';
+import { FiEdit } from 'react-icons/fi';
+
 import Avatar from '../../components/Avatar';
 import NewPost from '../../components/Feed/NewPost';
 import Post from '../../components/Feed/Post';
 import PageWrapper from '../../components/PageWrapper';
-import { Post as PostType, POSTS, USERS } from '../../utils/Mocks';
 import EditUserInfo from './EditUserInfo';
+
+import { Post as PostType, POSTS, USERS } from '../../utils/Mocks';
+
 import {
   AvatarNameRoleWrapper,
   Container,
