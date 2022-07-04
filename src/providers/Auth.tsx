@@ -35,8 +35,8 @@ const fakeApiCall = async (email: string, password: string): Promise<AuthState> 
 
 const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [data, setData] = useState<AuthState>(() => {
-    const token = localStorage.getItem('@TranscriptionTool:token');
-    const user = localStorage.getItem('@TranscriptionTool:user');
+    const token = localStorage.getItem('@ReactFeed:token');
+    const user = localStorage.getItem('@ReactFeed:user');
 
     if (token && user) {
       return { token, user };
@@ -49,12 +49,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     let success = true;
 
     try {
-      console.log(email);
-      console.log(password);
       const { token, user } = await fakeApiCall(email, password);
-
-      console.log(token);
-      console.log(user);
 
       localStorage.setItem('@ReactFeed:token', token);
       localStorage.setItem('@ReactFeed:user', user);
