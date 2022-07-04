@@ -9,7 +9,7 @@ export interface User {
 export interface Post {
   owner: User;
   content: string[];
-  publishedAt: string;
+  publishedAt: Date;
   link?: string;
   tags?: string[];
   likesCount: number;
@@ -19,7 +19,7 @@ export interface Post {
 export interface Comment {
   owner: User;
   message: string[];
-  publishedAt: string;
+  publishedAt: Date;
   likesCount: number;
 }
 
@@ -48,13 +48,13 @@ export const COMMENTS: Comment[] = [
   {
     owner: USERS[0],
     message: ['Parabéns, ficou ótimo!'],
-    publishedAt: 'há 20min atrás',
+    publishedAt: new Date(2022, 6, 3, 15, 32),
     likesCount: 3,
   },
   {
     owner: USERS[1],
     message: ['Que legal!'],
-    publishedAt: 'há 5min atrás',
+    publishedAt: new Date(2022, 6, 4, 8, 11),
     likesCount: 1,
   },
 ];
@@ -66,7 +66,7 @@ export const POSTS: Post[] = [
       'Fala galeraa 👋',
       'Acabei de subir mais um projeto no meu portifa. É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀',
     ],
-    publishedAt: 'há 1h atrás',
+    publishedAt: new Date(2022, 6, 1, 21, 16),
     link: 'eduardo.silva/doctorcare',
     tags: ['novoprojeto', 'nlw', 'rocketseat'],
     likesCount: 128,
@@ -78,7 +78,7 @@ export const POSTS: Post[] = [
       'Fala pessoal 👋',
       'Finalmente finalizei meu novo site/portfólio. Foi um baita desafio criar todo o design e codar na unha, mas consegui 💪🏻',
     ],
-    publishedAt: 'há 3h atrás',
+    publishedAt: new Date(2022, 6, 2, 11, 38),
     link: 'joao.design',
     tags: ['uiux', 'userexperience'],
     likesCount: 72,

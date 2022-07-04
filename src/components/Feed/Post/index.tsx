@@ -1,13 +1,9 @@
-import { ChangeEvent, MouseEventHandler, useState } from 'react';
+import { format, formatDistanceToNow } from 'date-fns';
+import pt from 'date-fns/locale/pt';
+import { ChangeEvent, useState } from 'react';
 import { FiMessageCircle, FiThumbsUp } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
-import {
-  Comment as CommentType,
-  COMMENTS,
-  Post as PostType,
-  POSTS,
-  USERS,
-} from '../../../utils/Mocks';
+import { Comment as CommentType, Post as PostType, POSTS, USERS } from '../../../utils/Mocks';
 import Avatar from '../../Avatar';
 import { TextArea } from '../../TextArea/styles';
 import Comment from '../Comments';
@@ -33,6 +29,15 @@ const Post: React.FC<PostProps> = ({ post, linkToProfile = false }) => {
   const [activeComment, setActiveComment] = useState(false);
   const [postComment, setPostComment] = useState('');
 
+  const publishedAtDateFormatted = format(post.publishedAt, "d 'de' LLLL 'às' HH:mm", {
+    locale: pt,
+  });
+
+  const publishedAtDistanceToNow = formatDistanceToNow(post.publishedAt, {
+    locale: pt,
+    addSuffix: true,
+  });
+
   const handleLike = (): void => {
     setActiveLike(!activeLike);
   };
@@ -50,7 +55,7 @@ const Post: React.FC<PostProps> = ({ post, linkToProfile = false }) => {
       owner: USERS[0],
       message: postComment.split('\n'),
       likesCount: 0,
-      publishedAt: String(Date.now()),
+      publishedAt: new Date(Date.now()),
     };
 
     POSTS[0].comments.push(comment);
@@ -74,7 +79,10 @@ const Post: React.FC<PostProps> = ({ post, linkToProfile = false }) => {
             <span>{post.owner.role}</span>
           </NameRoleWrapper>
         </Identification>
-        <time>{post.publishedAt}</time>
+
+        <time title={publishedAtDateFormatted} dateTime={post.publishedAt.toString()}>
+          Publicado {publishedAtDistanceToNow} atrás
+        </time>
       </PostHeader>
       <PostContent>
         {post.content.map((line) => (

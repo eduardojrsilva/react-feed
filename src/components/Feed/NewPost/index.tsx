@@ -22,7 +22,7 @@ const NewPost: React.FC<NewPostProps> = ({ posts, setPosts, profile = false }) =
   const handlePublish = (): void => {
     const post: Post = {
       owner: USERS[0],
-      publishedAt: String(Date.now()),
+      publishedAt: new Date(Date.now()),
       content: postContent.split('\n'),
       link: url,
       tags,

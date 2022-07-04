@@ -1,3 +1,5 @@
+import { format, formatDistanceToNow } from 'date-fns';
+import pt from 'date-fns/locale/pt';
 import { useState } from 'react';
 import { FiThumbsUp, FiTrash2 } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
@@ -11,6 +13,15 @@ interface CommentProps {
 
 const Comment: React.FC<CommentProps> = ({ comment }) => {
   const [activeLike, setActiveLike] = useState(false);
+
+  const publishedAtDateFormatted = format(comment.publishedAt, "d 'de' LLLL 'às' HH:mm", {
+    locale: pt,
+  });
+
+  const publishedAtDistanceToNow = formatDistanceToNow(comment.publishedAt, {
+    locale: pt,
+    addSuffix: true,
+  });
 
   const handleLike = (): void => {
     setActiveLike(!activeLike);
@@ -27,7 +38,10 @@ const Comment: React.FC<CommentProps> = ({ comment }) => {
               <Link to={`../profile/${comment.owner.name}`}>
                 <strong>{comment.owner.name}</strong>
               </Link>
-              <time>{comment.publishedAt}</time>
+
+              <time title={publishedAtDateFormatted} dateTime={comment.publishedAt.toString()}>
+                {publishedAtDistanceToNow} atrás
+              </time>
             </div>
 
             <button type="button">
