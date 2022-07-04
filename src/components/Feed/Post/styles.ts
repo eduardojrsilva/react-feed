@@ -125,4 +125,19 @@ export const CommentsContainer = styled.div`
   color: ${theme.colors.gray100};
   border-top: 1px solid ${theme.colors.gray600};
   padding-top: 20px;
+
+  > button {
+    background: ${theme.colors.green500};
+    color: ${theme.colors.gray100};
+    padding: 10px 20px;
+    width: max-content;
+    border-radius: 5px;
+    border: 0;
+    transition: background-color 0.2s;
+
+    :hover {
+      background: ${theme.colors.green300};
+      color: ${theme.colors.white};
+    }
+  }
 `;

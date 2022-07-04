@@ -18,7 +18,7 @@ export interface Post {
 
 export interface Comment {
   owner: User;
-  message: string;
+  message: string[];
   publishedAt: string;
   likesCount: number;
 }
@@ -47,13 +47,13 @@ export const USERS: User[] = [
 export const COMMENTS: Comment[] = [
   {
     owner: USERS[0],
-    message: 'Parabéns, ficou ótimo!',
+    message: ['Parabéns, ficou ótimo!'],
     publishedAt: 'há 20min atrás',
     likesCount: 3,
   },
   {
     owner: USERS[1],
-    message: 'Que legal!',
+    message: ['Que legal!'],
     publishedAt: 'há 5min atrás',
     likesCount: 1,
   },

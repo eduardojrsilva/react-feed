@@ -1,9 +1,16 @@
-import { useState } from 'react';
+import { ChangeEvent, MouseEventHandler, useState } from 'react';
 import { FiMessageCircle, FiThumbsUp } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
-import { Post as PostType } from '../../../utils/Mocks';
+import {
+  Comment as CommentType,
+  COMMENTS,
+  Post as PostType,
+  POSTS,
+  USERS,
+} from '../../../utils/Mocks';
 import Avatar from '../../Avatar';
 import { TextArea } from '../../TextArea/styles';
+import Comment from '../Comments';
 import {
   CommentsContainer,
   Container,
@@ -24,13 +31,31 @@ interface PostProps {
 const Post: React.FC<PostProps> = ({ post, linkToProfile = false }) => {
   const [activeLike, setActiveLike] = useState(false);
   const [activeComment, setActiveComment] = useState(false);
+  const [postComment, setPostComment] = useState('');
 
   const handleLike = (): void => {
     setActiveLike(!activeLike);
   };
 
-  const handleComment = (): void => {
+  const handleOpenCloseComment = (): void => {
     setActiveComment(!activeComment);
+  };
+
+  const handleChangePostComment = (event: ChangeEvent<HTMLTextAreaElement>): void => {
+    setPostComment(event.target.value);
+  };
+
+  const handleComment = (): void => {
+    const comment: CommentType = {
+      owner: USERS[0],
+      message: postComment.split('\n'),
+      likesCount: 0,
+      publishedAt: String(Date.now()),
+    };
+
+    POSTS[0].comments.push(comment);
+
+    setPostComment('');
   };
 
   return (
@@ -84,7 +109,7 @@ const Post: React.FC<PostProps> = ({ post, linkToProfile = false }) => {
           <span>{post.likesCount}</span>
         </div>
         <div>
-          <button type="button" onClick={handleComment}>
+          <button type="button" onClick={handleOpenCloseComment}>
             <FiMessageCircle />
           </button>
 
@@ -95,7 +120,20 @@ const Post: React.FC<PostProps> = ({ post, linkToProfile = false }) => {
       {activeComment && (
         <CommentsContainer>
           <strong>Deixe seu feedback</strong>
-          <TextArea rows={3} placeholder="Escreva um comentário..." />
+          <TextArea
+            value={postComment}
+            onChange={handleChangePostComment}
+            rows={3}
+            placeholder="Escreva um comentário..."
+          />
+          {postComment.length !== 0 && (
+            <button type="button" onClick={handleComment}>
+              Comentar
+            </button>
+          )}
+          {post.comments.map((comment) => (
+            <Comment comment={comment} />
+          ))}
         </CommentsContainer>
       )}
     </Container>
