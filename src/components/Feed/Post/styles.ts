@@ -109,8 +109,10 @@ export const InteractionsBar = styled.div<InteractionsBarProps>`
         $activeLike &&
         css`
           button {
-            svg {
-              color: ${theme.colors.green500};
+            color: ${theme.colors.green500};
+
+            :hover {
+              color: ${theme.colors.green300};
             }
           }
         `}
