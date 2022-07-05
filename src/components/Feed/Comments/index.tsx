@@ -6,16 +6,20 @@ import { FiThumbsUp, FiTrash2 } from 'react-icons/fi';
 
 import Avatar from '../../Avatar';
 
-import { Comment as CommentType } from '../../../utils/Mocks';
+import { Comment as CommentType, POSTS } from '../../../utils/Mocks';
+import { useAuth } from '../../../providers/Auth';
 
 import { CommentContainer, Container, Content, ContentHeader, LikeContainer } from './styles';
 
 interface CommentProps {
   comment: CommentType;
+  postId: number;
 }
 
-const Comment: React.FC<CommentProps> = ({ comment }) => {
+const Comment: React.FC<CommentProps> = ({ comment, postId }) => {
   const [activeLike, setActiveLike] = useState(false);
+
+  const { user } = useAuth();
 
   const publishedAtDateFormatted = format(comment.publishedAt, "d 'de' LLLL 'às' HH:mm", {
     locale: pt,
@@ -31,6 +35,12 @@ const Comment: React.FC<CommentProps> = ({ comment }) => {
     comment.likesCount += activeLike ? -1 : 1;
 
     setActiveLike(!activeLike);
+  };
+
+  const handleDeleteComment = (): void => {
+    POSTS[postId].comments = POSTS[postId].comments.filter(
+      (commentToCompare) => commentToCompare !== comment,
+    );
   };
 
   return (
@@ -50,9 +60,11 @@ const Comment: React.FC<CommentProps> = ({ comment }) => {
               </time>
             </div>
 
-            <button type="button">
-              <FiTrash2 />
-            </button>
+            {user === comment.owner && (
+              <button type="button" onClick={handleDeleteComment}>
+                <FiTrash2 />
+              </button>
+            )}
           </ContentHeader>
 
           {comment.message.map((line) => (

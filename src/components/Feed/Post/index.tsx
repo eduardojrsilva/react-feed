@@ -149,7 +149,7 @@ const Post: React.FC<PostProps> = ({ post, linkToProfile = false }) => {
             </button>
           )}
           {post.comments.map((comment) => (
-            <Comment comment={comment} />
+            <Comment comment={comment} postId={POSTS.indexOf(post)} />
           ))}
         </CommentsContainer>
       )}
