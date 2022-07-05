@@ -22,6 +22,11 @@ export const FormContainer = styled.form`
   h1 {
     text-transform: uppercase;
   }
+
+  @media (max-width: 600px) {
+    width: 80%;
+    padding: 30px 0px;
+  }
 `;
 
 export const LabelInputWrapper = styled.div`
@@ -29,6 +34,10 @@ export const LabelInputWrapper = styled.div`
 
   input {
     margin-top: 5px;
+  }
+
+  @media (max-width: 600px) {
+    width: 90%;
   }
 `;
 
