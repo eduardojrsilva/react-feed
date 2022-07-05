@@ -1,11 +1,17 @@
 import { ChangeEvent, FormEvent, useCallback, useState } from 'react';
-import { FiLoader } from 'react-icons/fi';
 
 import { Input } from '../../components/Input/styles';
 
 import { useAuth } from '../../providers/Auth';
 
-import { Container, FormContainer, LabelInputWrapper, SpaceComponent } from './styles';
+import {
+  Button,
+  Container,
+  FormContainer,
+  LabelInputWrapper,
+  Loading,
+  SpaceComponent,
+} from './styles';
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -62,11 +68,11 @@ const Login: React.FC = () => {
           />
         </LabelInputWrapper>
 
-        <button type="submit">
+        <Button type="submit" $isLoading={isLoaderOn}>
           <SpaceComponent />
           Entrar
-          {isLoaderOn ? <FiLoader size={15} /> : <SpaceComponent />}
-        </button>
+          {isLoaderOn ? <Loading /> : <SpaceComponent />}
+        </Button>
       </FormContainer>
     </Container>
   );
