@@ -71,8 +71,8 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         setData({ token, userId });
       } catch (err) {
         addToast({
-          title: 'Login failed',
-          description: 'Invalid credentials',
+          title: 'Erro ao realizar login',
+          description: 'Credenciais inválidas',
           type: 'error',
         });
 
