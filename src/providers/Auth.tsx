@@ -1,9 +1,10 @@
 import React, { createContext, ReactNode, useCallback, useContext, useState } from 'react';
+import { LOGINS, User, USERS } from '../utils/Mocks';
 import { useToast } from './Toast';
 
 interface AuthState {
   token: string;
-  user: string;
+  userId: number;
 }
 
 interface SignInCredentials {
@@ -12,7 +13,7 @@ interface SignInCredentials {
 }
 
 interface AuthContextData {
-  user: string;
+  user: User;
   signIn(credentials: SignInCredentials): Promise<boolean>;
   signOut(): void;
 }
@@ -26,11 +27,15 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 const fakeApiCall = async (email: string, password: string): Promise<AuthState> =>
   new Promise((resolve, reject) =>
     setTimeout(() => {
-      if (email && password) {
-        resolve({ token: 'FeedToken', user: email });
-      } else {
-        reject();
-      }
+      LOGINS.forEach((login, index) => {
+        if (login.email === email) {
+          if (login.password === password) {
+            resolve({ token: 'FeedToken', userId: index });
+          }
+        }
+      });
+
+      reject();
     }, 2000),
   );
 
@@ -39,8 +44,10 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const token = localStorage.getItem('@ReactFeed:token');
     const user = localStorage.getItem('@ReactFeed:user');
 
+    const userId = Number(user);
+
     if (token && user) {
-      return { token, user };
+      return { token, userId };
     }
 
     return {} as AuthState;
@@ -53,12 +60,12 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       let success = true;
 
       try {
-        const { token, user } = await fakeApiCall(email, password);
+        const { token, userId } = await fakeApiCall(email, password);
 
         localStorage.setItem('@ReactFeed:token', token);
-        localStorage.setItem('@ReactFeed:user', user);
+        localStorage.setItem('@ReactFeed:user', String(userId));
 
-        setData({ token, user });
+        setData({ token, userId });
       } catch (err) {
         addToast({
           title: 'Login failed',
@@ -82,7 +89,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user: data.user, signIn, signOut }}>
+    <AuthContext.Provider value={{ user: USERS[data.userId], signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   );

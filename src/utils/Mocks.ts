@@ -6,6 +6,12 @@ export interface User {
   HighDefinitionWallpaperUrl?: string;
 }
 
+interface Login {
+  email: string;
+  password: string;
+  user: User;
+}
+
 export interface Post {
   owner: User;
   content: string[];
@@ -83,5 +89,18 @@ export const POSTS: Post[] = [
     tags: ['uiux', 'userexperience'],
     likesCount: 72,
     comments: [COMMENTS[0]],
+  },
+];
+
+export const LOGINS: Login[] = [
+  {
+    email: 'eduardo@email.com',
+    password: '123456',
+    user: USERS[0],
+  },
+  {
+    email: 'joao@email.com',
+    password: '123456',
+    user: USERS[1],
   },
 ];
