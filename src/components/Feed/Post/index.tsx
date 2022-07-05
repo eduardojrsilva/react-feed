@@ -108,7 +108,9 @@ const Post: React.FC<PostProps> = ({ post, linkToProfile = false }) => {
             {post.link && (
               <>
                 <span>👉 </span>
-                <a href={post.link}>{post.link}</a>
+                <a href={post.link} target="_blank" rel="noreferrer">
+                  {post.link}
+                </a>
               </>
             )}
             <Tags>
