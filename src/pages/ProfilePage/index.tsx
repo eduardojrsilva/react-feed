@@ -8,8 +8,10 @@ import Post from '../../components/Feed/Post';
 import PageWrapper from '../../components/PageWrapper';
 import EditUserInfo from './EditUserInfo';
 
-import { Post as PostType, POSTS, USERS } from '../../utils/Mocks';
+import { POSTS, USERS } from '../../utils/Mocks';
 import { useAuth } from '../../providers/Auth';
+
+import { Post as PostType } from '../../model/Post';
 
 import {
   AvatarNameRoleWrapper,

@@ -6,8 +6,10 @@ import { FiThumbsUp, FiTrash2 } from 'react-icons/fi';
 
 import Avatar from '../../Avatar';
 
-import { Comment as CommentType, POSTS } from '../../../utils/Mocks';
+import { POSTS } from '../../../utils/Mocks';
 import { useAuth } from '../../../providers/Auth';
+
+import { Comment as CommentType } from '../../../model/Comment';
 
 import { CommentContainer, Container, Content, ContentHeader, LikeContainer } from './styles';
 

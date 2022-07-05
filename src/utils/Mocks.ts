@@ -1,33 +1,7 @@
-export interface User {
-  name: string;
-  role: string;
-  avatarUrl: string;
-  wallpaperUrl: string;
-  HighDefinitionWallpaperUrl?: string;
-}
-
-interface Login {
-  email: string;
-  password: string;
-  user: User;
-}
-
-export interface Post {
-  owner: User;
-  content: string[];
-  publishedAt: Date;
-  link?: string;
-  tags?: string[];
-  likesCount: number;
-  comments: Comment[];
-}
-
-export interface Comment {
-  owner: User;
-  message: string[];
-  publishedAt: Date;
-  likesCount: number;
-}
+import { Comment } from '../model/Comment';
+import { Login } from '../model/Login';
+import { Post } from '../model/Post';
+import { User } from '../model/User';
 
 export const USERS: User[] = [
   {

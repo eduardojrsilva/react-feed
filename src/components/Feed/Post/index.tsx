@@ -8,7 +8,11 @@ import Avatar from '../../Avatar';
 import Comment from '../Comments';
 import { TextArea } from '../../TextArea/styles';
 
-import { Comment as CommentType, Post as PostType, POSTS } from '../../../utils/Mocks';
+import { POSTS } from '../../../utils/Mocks';
+import { useAuth } from '../../../providers/Auth';
+
+import { Comment as CommentType } from '../../../model/Comment';
+import { Post as PostType } from '../../../model/Post';
 
 import {
   CommentsContainer,
@@ -21,7 +25,6 @@ import {
   PostHeader,
   Tags,
 } from './styles';
-import { useAuth } from '../../../providers/Auth';
 
 interface PostProps {
   post: PostType;

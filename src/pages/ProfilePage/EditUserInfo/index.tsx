@@ -1,6 +1,6 @@
 import { Input } from '../../../components/Input/styles';
 
-import { User } from '../../../utils/Mocks';
+import { User } from '../../../model/User';
 
 import { ButtonsContainer, EditInfo, LabelInputWrapper, NameRoleWrapper } from './styles';
 

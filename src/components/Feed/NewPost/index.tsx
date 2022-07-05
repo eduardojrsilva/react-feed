@@ -4,8 +4,10 @@ import BagOfWords from '../../BagOfWords';
 import { Input } from '../../Input/styles';
 import { TextArea } from '../../TextArea/styles';
 
-import { Post, POSTS } from '../../../utils/Mocks';
+import { POSTS } from '../../../utils/Mocks';
 import { useAuth } from '../../../providers/Auth';
+
+import { Post } from '../../../model/Post';
 
 import { Button, ButtonsContainer, Container, InputWrapper } from './styles';
 

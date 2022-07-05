@@ -1,6 +1,6 @@
 import Avatar from '../Avatar';
 
-import { User } from '../../utils/Mocks';
+import { User } from '../../model/User';
 
 import { Container, Content, StyledLink, ViewProfileContainer, Wallpaper } from './styles';
 

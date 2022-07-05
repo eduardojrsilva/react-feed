@@ -3,8 +3,10 @@ import { useState } from 'react';
 import NewPost from './NewPost';
 import Post from './Post';
 
-import { Post as PostType, POSTS } from '../../utils/Mocks';
+import { POSTS } from '../../utils/Mocks';
 import { useAuth } from '../../providers/Auth';
+
+import { Post as PostType } from '../../model/Post';
 
 import { Container } from './styles';
 

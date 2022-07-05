@@ -4,7 +4,9 @@ import { useParams } from 'react-router-dom';
 import Post from '../../components/Feed/Post';
 import PageWrapper from '../../components/PageWrapper';
 
-import { Post as PostType, POSTS } from '../../utils/Mocks';
+import { POSTS } from '../../utils/Mocks';
+
+import { Post as PostType } from '../../model/Post';
 
 import { Container, Separator, Title } from './styles';
 

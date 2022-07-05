@@ -1,6 +1,9 @@
 import React, { createContext, ReactNode, useCallback, useContext, useState } from 'react';
-import { LOGINS, User, USERS } from '../utils/Mocks';
+
 import { useToast } from './Toast';
+import { LOGINS, USERS } from '../utils/Mocks';
+
+import { User } from '../model/User';
 
 interface AuthState {
   token: string;
