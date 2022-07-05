@@ -3,12 +3,11 @@ import { Link } from 'react-router-dom';
 import Avatar from '../Avatar';
 
 import { useAuth } from '../../providers/Auth';
-import { USERS } from '../../utils/Mocks';
 
 import { StyledHeader } from './styles';
 
 const Header: React.FC = () => {
-  const { signOut } = useAuth();
+  const { signOut, user } = useAuth();
 
   return (
     <StyledHeader>
@@ -19,7 +18,7 @@ const Header: React.FC = () => {
         <button type="button" onClick={signOut}>
           Sair
         </button>
-        <Avatar avatarUrl={USERS[0].avatarUrl} menuMobile />
+        <Avatar avatarUrl={user.avatarUrl} menuMobile />
       </div>
     </StyledHeader>
   );

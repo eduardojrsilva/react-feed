@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { convertPixelToRem } from 'css-blocks-styled-components';
+import { convertPixelToRem, flex } from 'css-blocks-styled-components';
 
 import { theme } from '../../styles/theme';
 
@@ -115,4 +115,12 @@ export const UserPosts = styled.div`
 export const Separator = styled.hr`
   border-top: thin;
   border-color: ${theme.colors.gray700};
+`;
+
+export const Warning = styled.div`
+  ${flex.middle};
+  padding-top: ${convertPixelToRem(50)};
+  color: ${theme.colors.gray100};
+  font-size: ${convertPixelToRem(32)};
+  font-weight: 700;
 `;

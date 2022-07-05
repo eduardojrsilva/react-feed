@@ -27,6 +27,9 @@ const Comment: React.FC<CommentProps> = ({ comment }) => {
   });
 
   const handleLike = (): void => {
+    // eslint-disable-next-line no-param-reassign
+    comment.likesCount += activeLike ? -1 : 1;
+
     setActiveLike(!activeLike);
   };
 

@@ -4,26 +4,27 @@ import BagOfWords from '../../BagOfWords';
 import { Input } from '../../Input/styles';
 import { TextArea } from '../../TextArea/styles';
 
-import { Post, POSTS, USERS } from '../../../utils/Mocks';
+import { Post, POSTS } from '../../../utils/Mocks';
+import { useAuth } from '../../../providers/Auth';
 
 import { Button, ButtonsContainer, Container, InputWrapper } from './styles';
 
 interface NewPostProps {
-  posts: Post[];
-  setPosts: (posts: Post[]) => void;
   profile?: boolean;
 }
 
-const NewPost: React.FC<NewPostProps> = ({ posts, setPosts, profile = false }) => {
+const NewPost: React.FC<NewPostProps> = ({ profile = false }) => {
   const [postContent, setPostContent] = useState('');
   const [isUrlOn, setIsUrlOn] = useState(false);
   const [isTagsOn, setIsTagsOn] = useState(false);
   const [url, setUrl] = useState('');
   const [tags, setTags] = useState<string[]>([]);
 
+  const { user } = useAuth();
+
   const handlePublish = (): void => {
     const post: Post = {
-      owner: USERS[0],
+      owner: user,
       publishedAt: new Date(Date.now()),
       content: postContent.split('\n'),
       link: url,
@@ -32,7 +33,6 @@ const NewPost: React.FC<NewPostProps> = ({ posts, setPosts, profile = false }) =
       comments: [],
     };
 
-    setPosts([post, ...posts]);
     POSTS.unshift(post);
 
     setPostContent('');

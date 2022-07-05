@@ -9,6 +9,7 @@ import PageWrapper from '../../components/PageWrapper';
 import EditUserInfo from './EditUserInfo';
 
 import { Post as PostType, POSTS, USERS } from '../../utils/Mocks';
+import { useAuth } from '../../providers/Auth';
 
 import {
   AvatarNameRoleWrapper,
@@ -17,6 +18,7 @@ import {
   UserInfo,
   UserPosts,
   Wallpaper,
+  Warning,
   Wrapper,
 } from './styles';
 
@@ -29,7 +31,9 @@ const ProfilePage: React.FC = () => {
   const [editMode, setEditMode] = useState(false);
   const [userPosts, setUserPosts] = useState<PostType[]>([]);
 
-  const user = USERS.find(({ name }) => username === name) || USERS[0];
+  const { user: LoggedUser } = useAuth();
+
+  const user = USERS.find(({ name }) => username === name);
 
   const handleEditMode = (): void => {
     setEditMode(!editMode);
@@ -38,6 +42,10 @@ const ProfilePage: React.FC = () => {
   useEffect(() => {
     setUserPosts(POSTS.filter((post) => post.owner === user));
   }, [user, username]);
+
+  if (!user) {
+    return <Warning>Usuário não encontrado</Warning>;
+  }
 
   return (
     <PageWrapper>
@@ -53,7 +61,7 @@ const ProfilePage: React.FC = () => {
               </div>
             </AvatarNameRoleWrapper>
 
-            {!editMode && (
+            {!editMode && user === LoggedUser && (
               <button type="button" onClick={handleEditMode}>
                 <FiEdit />
                 Editar informações
@@ -61,19 +69,25 @@ const ProfilePage: React.FC = () => {
             )}
           </UserInfo>
 
-          <Separator />
+          {user === LoggedUser && <Separator />}
 
           {editMode ? (
             <EditUserInfo user={user} handleEditMode={handleEditMode} />
           ) : (
             <>
-              <NewPost posts={userPosts} setPosts={setUserPosts} profile />
+              {user === LoggedUser && <NewPost profile />}
 
               {!userPosts.length ? (
-                <span>Você ainda não tem nenhuma publicação</span>
+                <span>
+                  {user === LoggedUser
+                    ? 'Você ainda não tem nenhuma publicação'
+                    : `${user.name} ainda não tem nenhuma publicação`}
+                </span>
               ) : (
                 <UserPosts>
-                  <strong>Suas postagens:</strong>
+                  <strong>
+                    {user === LoggedUser ? 'Suas postagens:' : `Postagens de ${user.name}:`}
+                  </strong>
 
                   {userPosts.map((post, index) => (
                     <>

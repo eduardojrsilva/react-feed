@@ -48,6 +48,15 @@ export const USERS: User[] = [
     HighDefinitionWallpaperUrl:
       'https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Y2Fyc3xlbnwwfHwwfHw%3D&auto=format&fit=crop&w=1000&q=60',
   },
+  {
+    name: 'Maria',
+    role: 'Product Manager',
+    avatarUrl: 'https://github.com/maria.png',
+    wallpaperUrl:
+      'https://images.unsplash.com/photo-1580894742597-87bc8789db3d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8dGVjaG5vbG9neXxlbnwwfDB8MHx8&auto=format&fit=crop&w=250&q=60',
+    HighDefinitionWallpaperUrl:
+      'https://images.unsplash.com/photo-1580894742597-87bc8789db3d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8dGVjaG5vbG9neXxlbnwwfDB8MHx8&auto=format&fit=crop&w=1000&q=60',
+  },
 ];
 
 export const COMMENTS: Comment[] = [
@@ -102,5 +111,10 @@ export const LOGINS: Login[] = [
     email: 'joao@email.com',
     password: '123456',
     user: USERS[1],
+  },
+  {
+    email: 'maria@email.com',
+    password: '123456',
+    user: USERS[2],
   },
 ];

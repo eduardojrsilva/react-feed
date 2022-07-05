@@ -8,7 +8,7 @@ import Avatar from '../../Avatar';
 import Comment from '../Comments';
 import { TextArea } from '../../TextArea/styles';
 
-import { Comment as CommentType, Post as PostType, POSTS, USERS } from '../../../utils/Mocks';
+import { Comment as CommentType, Post as PostType, POSTS } from '../../../utils/Mocks';
 
 import {
   CommentsContainer,
@@ -21,6 +21,7 @@ import {
   PostHeader,
   Tags,
 } from './styles';
+import { useAuth } from '../../../providers/Auth';
 
 interface PostProps {
   post: PostType;
@@ -32,6 +33,8 @@ const Post: React.FC<PostProps> = ({ post, linkToProfile = false }) => {
   const [activeComment, setActiveComment] = useState(false);
   const [postComment, setPostComment] = useState('');
 
+  const { user } = useAuth();
+
   const publishedAtDateFormatted = format(post.publishedAt, "d 'de' LLLL 'às' HH:mm", {
     locale: pt,
   });
@@ -42,6 +45,9 @@ const Post: React.FC<PostProps> = ({ post, linkToProfile = false }) => {
   });
 
   const handleLike = (): void => {
+    // eslint-disable-next-line no-param-reassign
+    post.likesCount += activeLike ? -1 : 1;
+
     setActiveLike(!activeLike);
   };
 
@@ -55,13 +61,13 @@ const Post: React.FC<PostProps> = ({ post, linkToProfile = false }) => {
 
   const handleComment = (): void => {
     const comment: CommentType = {
-      owner: USERS[0],
+      owner: user,
       message: postComment.split('\n'),
       likesCount: 0,
       publishedAt: new Date(Date.now()),
     };
 
-    POSTS[0].comments.push(comment);
+    POSTS[POSTS.indexOf(post)].comments.push(comment);
 
     setPostComment('');
   };
