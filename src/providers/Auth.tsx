@@ -1,4 +1,5 @@
 import React, { createContext, ReactNode, useCallback, useContext, useState } from 'react';
+import { useToast } from './Toast';
 
 interface AuthState {
   token: string;
@@ -45,22 +46,33 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     return {} as AuthState;
   });
 
-  const signIn = useCallback(async ({ email, password }: SignInCredentials) => {
-    let success = true;
+  const { addToast } = useToast();
 
-    try {
-      const { token, user } = await fakeApiCall(email, password);
+  const signIn = useCallback(
+    async ({ email, password }: SignInCredentials) => {
+      let success = true;
 
-      localStorage.setItem('@ReactFeed:token', token);
-      localStorage.setItem('@ReactFeed:user', user);
+      try {
+        const { token, user } = await fakeApiCall(email, password);
 
-      setData({ token, user });
-    } catch {
-      success = false;
-    }
+        localStorage.setItem('@ReactFeed:token', token);
+        localStorage.setItem('@ReactFeed:user', user);
 
-    return success;
-  }, []);
+        setData({ token, user });
+      } catch (err) {
+        addToast({
+          title: 'Login failed',
+          description: 'Invalid credentials',
+          type: 'error',
+        });
+
+        success = false;
+      }
+
+      return success;
+    },
+    [addToast],
+  );
 
   const signOut = useCallback(() => {
     localStorage.removeItem('@ReactFeed:token');
