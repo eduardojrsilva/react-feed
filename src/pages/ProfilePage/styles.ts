@@ -96,6 +96,10 @@ export const AvatarNameRoleWrapper = styled.div`
     margin-top: -60px;
     flex-direction: column;
     gap: 0;
+
+    div {
+      align-items: center;
+    }
   }
 `;
 

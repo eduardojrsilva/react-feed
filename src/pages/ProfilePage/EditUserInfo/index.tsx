@@ -60,6 +60,7 @@ const EditUserInfo: React.FC<EditUserInfoProps> = ({ user, handleEditMode }) => 
       type: 'success',
     });
 
+    handleEditMode();
     history.push(`/profile/${name}`);
   };
 
