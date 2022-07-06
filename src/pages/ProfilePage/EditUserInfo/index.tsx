@@ -47,6 +47,7 @@ const EditUserInfo: React.FC<EditUserInfoProps> = ({ user, handleEditMode }) => 
 
   const handleSaveChanges = (): void => {
     USERS[USERS.indexOf(user)] = {
+      id: USERS[USERS.indexOf(user)].id,
       name,
       role,
       avatarUrl,

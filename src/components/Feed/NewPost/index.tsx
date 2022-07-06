@@ -1,4 +1,5 @@
 import { ChangeEvent, useState } from 'react';
+import { v4 as uuid } from 'uuid';
 
 import BagOfWords from '../../BagOfWords';
 import { Input } from '../../Input/styles';
@@ -26,6 +27,7 @@ const NewPost: React.FC<NewPostProps> = ({ profile = false }) => {
 
   const handlePublish = (): void => {
     const post: Post = {
+      id: uuid(),
       owner: user,
       publishedAt: new Date(Date.now()),
       content: postContent.split('\n'),

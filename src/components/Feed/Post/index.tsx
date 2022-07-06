@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { format, formatDistanceToNow } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import { FiMessageCircle, FiThumbsUp } from 'react-icons/fi';
+import { v4 as uuid } from 'uuid';
 
 import Avatar from '../../Avatar';
 import Comment from '../Comments';
@@ -64,6 +65,7 @@ const Post: React.FC<PostProps> = ({ post, linkToProfile = false }) => {
 
   const handleComment = (): void => {
     const comment: CommentType = {
+      id: uuid(),
       owner: user,
       message: postComment.split('\n'),
       likesCount: 0,
@@ -98,10 +100,10 @@ const Post: React.FC<PostProps> = ({ post, linkToProfile = false }) => {
       </PostHeader>
       <PostContent>
         {post.content.map((line) => (
-          <>
+          <div key={`${post.id}-${line}`}>
             <span>{line}</span>
             <br />
-          </>
+          </div>
         ))}
         {(post.tags || post.link) && (
           <Links>
@@ -115,7 +117,9 @@ const Post: React.FC<PostProps> = ({ post, linkToProfile = false }) => {
             )}
             <Tags>
               {post.tags?.map((tag) => (
-                <a href={`/tags/${tag}`}>#{tag}</a>
+                <a href={`/tags/${tag}`} key={`${post.id}-${tag} `}>
+                  #{tag}
+                </a>
               ))}
             </Tags>
           </Links>
@@ -154,7 +158,7 @@ const Post: React.FC<PostProps> = ({ post, linkToProfile = false }) => {
             </button>
           )}
           {post.comments.map((comment) => (
-            <Comment comment={comment} postId={POSTS.indexOf(post)} />
+            <Comment comment={comment} postId={POSTS.indexOf(post)} key={comment.id} />
           ))}
         </CommentsContainer>
       )}

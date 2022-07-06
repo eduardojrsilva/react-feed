@@ -21,7 +21,7 @@ const Feed: React.FC = () => {
       {posts
         .filter((post) => post.owner !== user)
         .map((post) => (
-          <Post post={post} linkToProfile />
+          <Post post={post} linkToProfile key={post.id} />
         ))}
     </Container>
   );

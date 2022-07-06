@@ -38,10 +38,10 @@ const Tags: React.FC = () => {
         ) : (
           <>
             {posts.map((post, index) => (
-              <>
+              <div key={post.id}>
                 <Post post={post} linkToProfile />
                 {posts.length !== index + 1 && <Separator />}
-              </>
+              </div>
             ))}
           </>
         )}

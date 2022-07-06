@@ -70,7 +70,7 @@ const Comment: React.FC<CommentProps> = ({ comment, postId }) => {
           </ContentHeader>
 
           {comment.message.map((line) => (
-            <div>
+            <div key={`${comment.id}-${line}`}>
               <span>{line}</span>
               <br />
             </div>

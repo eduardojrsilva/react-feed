@@ -92,10 +92,10 @@ const ProfilePage: React.FC = () => {
                   </strong>
 
                   {userPosts.map((post, index) => (
-                    <>
+                    <div key={post.id}>
                       <Post post={post} />
                       {userPosts.length !== index + 1 && <Separator />}
-                    </>
+                    </div>
                   ))}
                 </UserPosts>
               )}
