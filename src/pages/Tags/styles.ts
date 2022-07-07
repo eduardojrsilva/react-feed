@@ -20,6 +20,8 @@ export const Container = styled.div`
 `;
 
 export const Title = styled.h1`
+  text-align: center;
+
   span {
     color: ${theme.colors.green500};
   }
