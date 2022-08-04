@@ -1,13 +1,14 @@
 import React, { createContext, ReactNode, useCallback, useContext, useState } from 'react';
 
 import { useToast } from './Toast';
-import { LOGINS, USERS } from '../utils/Mocks';
+
+import api from '../services/api';
 
 import { User } from '../model/User';
 
 interface AuthState {
   token: string;
-  userId: number;
+  user: User;
 }
 
 interface SignInCredentials {
@@ -27,30 +28,13 @@ interface AuthProviderProps {
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
-const fakeApiCall = async (email: string, password: string): Promise<AuthState> =>
-  new Promise((resolve, reject) =>
-    setTimeout(() => {
-      LOGINS.forEach((login, index) => {
-        if (login.email === email) {
-          if (login.password === password) {
-            resolve({ token: 'FeedToken', userId: index });
-          }
-        }
-      });
-
-      reject();
-    }, 2000),
-  );
-
 const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [data, setData] = useState<AuthState>(() => {
     const token = localStorage.getItem('@ReactFeed:token');
     const user = localStorage.getItem('@ReactFeed:user');
 
-    const userId = Number(user);
-
     if (token && user) {
-      return { token, userId };
+      return { token, user: JSON.parse(user) };
     }
 
     return {} as AuthState;
@@ -63,12 +47,17 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       let success = true;
 
       try {
-        const { token, userId } = await fakeApiCall(email, password);
+        const response = await api.post('user/authenticate', {
+          email,
+          password,
+        });
+
+        const { token, user } = response.data;
 
         localStorage.setItem('@ReactFeed:token', token);
-        localStorage.setItem('@ReactFeed:user', String(userId));
+        localStorage.setItem('@ReactFeed:user', JSON.stringify(user));
 
-        setData({ token, userId });
+        setData({ token, user });
       } catch (err) {
         addToast({
           title: 'Erro ao realizar login',
@@ -92,7 +81,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user: USERS[data.userId], signIn, signOut }}>
+    <AuthContext.Provider value={{ user: data.user, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   );
@@ -102,7 +91,7 @@ function useAuth(): AuthContextData {
   const context = useContext(AuthContext);
 
   if (!context) {
-    throw new Error('useAuth must be used within an AutoProvider');
+    throw new Error('useAuth must be used within an AuthProvider');
   }
 
   return context;
