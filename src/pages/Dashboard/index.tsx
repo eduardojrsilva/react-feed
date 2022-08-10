@@ -8,6 +8,7 @@ import { Container } from './styles';
 
 const Dashboard: React.FC = () => {
   const { user } = useAuth();
+
   return (
     <PageWrapper>
       <Container>

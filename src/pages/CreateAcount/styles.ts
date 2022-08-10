@@ -3,11 +3,21 @@ import { convertPixelToRem, flex } from 'css-blocks-styled-components';
 import { FiLoader } from 'react-icons/fi';
 
 export const Container = styled.div`
-  ${flex.middle}
+  display: flex;
+  align-items: center;
   flex-direction: column;
   gap: ${convertPixelToRem(20)};
+  padding: ${convertPixelToRem(50)} 0;
   height: 100%;
   color: ${({ theme }) => theme.colors.gray100};
+
+  > a {
+    color: ${({ theme }) => theme.colors.green500};
+
+    :hover {
+      color: ${({ theme }) => theme.colors.green300};
+    }
+  }
 `;
 
 export const FormContainer = styled.form`
@@ -109,20 +119,6 @@ export const Loading = styled(FiLoader)`
       -webkit-transform: rotate(360deg);
       -ms-transform: rotate(360deg);
       transform: rotate(360deg);
-    }
-  }
-`;
-
-export const NewAcountContainer = styled.div`
-  ${flex.middle}
-  flex-direction: column;
-  gap: ${convertPixelToRem(10)};
-
-  a {
-    color: ${({ theme }) => theme.colors.green500};
-
-    :hover {
-      color: ${({ theme }) => theme.colors.green300};
     }
   }
 `;

@@ -1,4 +1,5 @@
 import { ChangeEvent, FormEvent, useCallback, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { Input } from '../../components/Input/styles';
 
@@ -10,6 +11,7 @@ import {
   FormContainer,
   LabelInputWrapper,
   Loading,
+  NewAcountContainer,
   SpaceComponent,
 } from './styles';
 
@@ -74,6 +76,12 @@ const Login: React.FC = () => {
           {isLoaderOn ? <Loading /> : <SpaceComponent />}
         </Button>
       </FormContainer>
+
+      <NewAcountContainer>
+        <span>Ainda não tem uma conta?</span>
+
+        <Link to="new-account">Crie agora</Link>
+      </NewAcountContainer>
     </Container>
   );
 };

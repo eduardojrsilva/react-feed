@@ -58,7 +58,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         localStorage.setItem('@ReactFeed:user', JSON.stringify(user));
 
         setData({ token, user });
-      } catch (err) {
+      } catch {
         addToast({
           title: 'Erro ao realizar login',
           description: 'Credenciais inválidas',
