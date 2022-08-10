@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { FiEdit } from 'react-icons/fi';
 
@@ -8,10 +8,10 @@ import Post from '../../components/Feed/Post';
 import PageWrapper from '../../components/PageWrapper';
 import EditUserInfo from './EditUserInfo';
 
-import { POSTS, USERS } from '../../utils/Mocks';
 import { useAuth } from '../../providers/Auth';
+import api from '../../services/api';
 
-import { Post as PostType } from '../../model/Post';
+import { User } from '../../model/User';
 
 import {
   AvatarNameRoleWrapper,
@@ -25,25 +25,36 @@ import {
 } from './styles';
 
 interface Params {
-  username: string;
+  id: string;
 }
 
 const ProfilePage: React.FC = () => {
-  const { username }: Params = useParams();
+  const [user, setUser] = useState<User>({} as User);
   const [editMode, setEditMode] = useState(false);
-  const [userPosts, setUserPosts] = useState<PostType[]>([]);
 
-  const { user: LoggedUser } = useAuth();
+  const { user: loggedUser } = useAuth();
+  const { id }: Params = useParams();
 
-  const user = USERS.find(({ name }) => username === name);
+  const isMyProfile = user.id === loggedUser.id;
+
+  const getUser = useCallback(async () => {
+    const { data } = await api.get<User>('/user', {
+      params: {
+        id,
+      },
+    });
+
+    setUser(data);
+  }, [id]);
+
+  useEffect(() => {
+    getUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleEditMode = (): void => {
     setEditMode(!editMode);
   };
-
-  useEffect(() => {
-    setUserPosts(POSTS.filter((post) => post.owner === user));
-  }, [user, username]);
 
   if (!user) {
     return <Warning>Usuário não encontrado</Warning>;
@@ -52,18 +63,18 @@ const ProfilePage: React.FC = () => {
   return (
     <PageWrapper>
       <Container>
-        <Wallpaper src={user.HighDefinitionWallpaperUrl} />
+        <Wallpaper src={user.wallpaper} />
         <Wrapper>
           <UserInfo>
             <AvatarNameRoleWrapper>
-              <Avatar avatarUrl={user.avatarUrl} large />
+              <Avatar avatarUrl={user.avatar} large />
               <div>
                 <strong>{user.name}</strong>
                 <span>{user.role}</span>
               </div>
             </AvatarNameRoleWrapper>
 
-            {!editMode && user === LoggedUser && (
+            {!editMode && isMyProfile && (
               <button type="button" onClick={handleEditMode}>
                 <FiEdit />
                 Editar informações
@@ -71,30 +82,28 @@ const ProfilePage: React.FC = () => {
             )}
           </UserInfo>
 
-          {user === LoggedUser && <Separator />}
+          {isMyProfile && <Separator />}
 
           {editMode ? (
             <EditUserInfo user={user} handleEditMode={handleEditMode} />
           ) : (
             <>
-              {user === LoggedUser && <NewPost profile />}
+              {isMyProfile && <NewPost profile />}
 
-              {!userPosts.length ? (
+              {!user.posts?.length ? (
                 <span>
-                  {user === LoggedUser
+                  {isMyProfile
                     ? 'Você ainda não tem nenhuma publicação'
                     : `${user.name} ainda não tem nenhuma publicação`}
                 </span>
               ) : (
                 <UserPosts>
-                  <strong>
-                    {user === LoggedUser ? 'Suas postagens:' : `Postagens de ${user.name}:`}
-                  </strong>
+                  <strong>{isMyProfile ? 'Suas postagens:' : `Postagens de ${user.name}:`}</strong>
 
-                  {userPosts.map((post, index) => (
+                  {user.posts.map((post, index) => (
                     <div key={post.id}>
                       <Post post={post} />
-                      {userPosts.length !== index + 1 && <Separator />}
+                      {user.posts.length !== index + 1 && <Separator />}
                     </div>
                   ))}
                 </UserPosts>

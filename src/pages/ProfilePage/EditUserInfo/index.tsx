@@ -4,7 +4,6 @@ import { useHistory } from 'react-router-dom';
 import { Input } from '../../../components/Input/styles';
 
 import { useToast } from '../../../providers/Toast';
-import { USERS } from '../../../utils/Mocks';
 
 import { User } from '../../../model/User';
 
@@ -18,9 +17,8 @@ interface EditUserInfoProps {
 const EditUserInfo: React.FC<EditUserInfoProps> = ({ user, handleEditMode }) => {
   const [name, setName] = useState(user.name);
   const [role, setRole] = useState(user.role);
-  const [avatarUrl, setAvatarUrl] = useState(user.avatarUrl);
-  const [wallpaperUrl, setWallpaperUrl] = useState(user.wallpaperUrl);
-  const [hdwallpaperUrl, setHdwallpaperUrl] = useState(user.HighDefinitionWallpaperUrl);
+  const [avatar, setAvatar] = useState(user.avatar);
+  const [wallpaper, setWallpaper] = useState(user.wallpaper);
 
   const { addToast } = useToast();
   const history = useHistory();
@@ -33,27 +31,16 @@ const EditUserInfo: React.FC<EditUserInfoProps> = ({ user, handleEditMode }) => 
     setRole(event.target.value);
   };
 
-  const handleChangeAvatarUrl = (event: ChangeEvent<HTMLInputElement>): void => {
-    setAvatarUrl(event.target.value);
+  const handleChangeAvatar = (event: ChangeEvent<HTMLInputElement>): void => {
+    setAvatar(event.target.value);
   };
 
-  const handleChangeWallpaperUrl = (event: ChangeEvent<HTMLInputElement>): void => {
-    setWallpaperUrl(event.target.value);
-  };
-
-  const handleChangeHdwallpaperUrl = (event: ChangeEvent<HTMLInputElement>): void => {
-    setHdwallpaperUrl(event.target.value);
+  const handleChangeWallpaper = (event: ChangeEvent<HTMLInputElement>): void => {
+    setWallpaper(event.target.value);
   };
 
   const handleSaveChanges = (): void => {
-    USERS[USERS.indexOf(user)] = {
-      id: USERS[USERS.indexOf(user)].id,
-      name,
-      role,
-      avatarUrl,
-      wallpaperUrl,
-      HighDefinitionWallpaperUrl: hdwallpaperUrl,
-    };
+    // edit user
 
     addToast({
       title: 'Sucesso',
@@ -92,35 +79,24 @@ const EditUserInfo: React.FC<EditUserInfoProps> = ({ user, handleEditMode }) => 
       </NameRoleWrapper>
 
       <LabelInputWrapper $column>
-        <label htmlFor="avatarUrl">Avatar URL: </label>
+        <label htmlFor="avatar">Avatar: </label>
         <Input
           type="text"
-          id="avatarUrl"
-          value={avatarUrl}
-          onChange={handleChangeAvatarUrl}
-          placeholder="Avatar URL"
+          id="avatar"
+          value={avatar}
+          onChange={handleChangeAvatar}
+          placeholder="Avatar"
         />
       </LabelInputWrapper>
 
       <LabelInputWrapper $column>
-        <label htmlFor="wallpaperUrl">Wallpaper URL: </label>
+        <label htmlFor="wallpaper">Wallpaper: </label>
         <Input
           type="text"
-          id="wallpaperUrl"
-          value={wallpaperUrl}
-          onChange={handleChangeWallpaperUrl}
-          placeholder="Wallpaper URL"
-        />
-      </LabelInputWrapper>
-
-      <LabelInputWrapper $column>
-        <label htmlFor="hdwallpaperUrl">High definition wallpaper URL: </label>
-        <Input
-          type="text"
-          id="hdwallpaperUrl"
-          value={hdwallpaperUrl}
-          onChange={handleChangeHdwallpaperUrl}
-          placeholder="High definition wallpaper URL"
+          id="wallpaper"
+          value={wallpaper}
+          onChange={handleChangeWallpaper}
+          placeholder="Wallpaper"
         />
       </LabelInputWrapper>
 

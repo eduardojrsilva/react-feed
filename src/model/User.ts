@@ -1,8 +1,10 @@
+import { Post } from './Post';
+
 export interface User {
   id: string;
   name: string;
   role: string;
-  avatarUrl: string;
-  wallpaperUrl: string;
-  HighDefinitionWallpaperUrl?: string;
+  avatar: string;
+  wallpaper: string;
+  posts: Post[];
 }

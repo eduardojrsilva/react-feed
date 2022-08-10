@@ -4,8 +4,6 @@ import { useParams } from 'react-router-dom';
 import Post from '../../components/Feed/Post';
 import PageWrapper from '../../components/PageWrapper';
 
-import { POSTS } from '../../utils/Mocks';
-
 import { Post as PostType } from '../../model/Post';
 
 import { Container, Separator, Title } from './styles';
@@ -19,11 +17,7 @@ const Tags: React.FC = () => {
   const [posts, setPosts] = useState<PostType[]>();
 
   useEffect(() => {
-    setPosts(
-      POSTS.filter((post) => {
-        return post.tags?.some((postTag) => postTag === tag);
-      }),
-    );
+    // get posts with tag
   }, [tag]);
 
   return (

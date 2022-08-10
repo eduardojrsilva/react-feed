@@ -11,14 +11,14 @@ interface ProfileProps {
 const Profile: React.FC<ProfileProps> = ({ user }) => {
   return (
     <Container>
-      <Wallpaper src={user.wallpaperUrl} alt="" />
+      <Wallpaper src={user.wallpaper} alt="" />
       <Content>
-        <Avatar avatarUrl={user.avatarUrl} />
+        <Avatar avatarUrl={user.avatar} />
         <strong>{user.name}</strong>
         <span>{user.role}</span>
       </Content>
       <ViewProfileContainer>
-        <StyledLink to={`/profile/${user.name}`}>Visualizar Perfil</StyledLink>
+        <StyledLink to={`/profile/${user.id}`}>Visualizar Perfil</StyledLink>
       </ViewProfileContainer>
     </Container>
   );

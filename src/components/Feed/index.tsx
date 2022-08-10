@@ -3,7 +3,6 @@ import { useState } from 'react';
 import NewPost from './NewPost';
 import Post from './Post';
 
-import { POSTS } from '../../utils/Mocks';
 import { useAuth } from '../../providers/Auth';
 
 import { Post as PostType } from '../../model/Post';
@@ -11,7 +10,7 @@ import { Post as PostType } from '../../model/Post';
 import { Container } from './styles';
 
 const Feed: React.FC = () => {
-  const [posts, setPosts] = useState<PostType[]>(POSTS);
+  const [posts, setPosts] = useState<PostType[]>([]);
 
   const { user } = useAuth();
 

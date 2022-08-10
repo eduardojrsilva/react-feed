@@ -6,7 +6,6 @@ import { FiThumbsUp, FiTrash2 } from 'react-icons/fi';
 
 import Avatar from '../../Avatar';
 
-import { POSTS } from '../../../utils/Mocks';
 import { useAuth } from '../../../providers/Auth';
 
 import { Comment as CommentType } from '../../../model/Comment';
@@ -15,7 +14,7 @@ import { CommentContainer, Container, Content, ContentHeader, LikeContainer } fr
 
 interface CommentProps {
   comment: CommentType;
-  postId: number;
+  postId: string;
 }
 
 const Comment: React.FC<CommentProps> = ({ comment, postId }) => {
@@ -40,20 +39,20 @@ const Comment: React.FC<CommentProps> = ({ comment, postId }) => {
   };
 
   const handleDeleteComment = (): void => {
-    POSTS[postId].comments = POSTS[postId].comments.filter(
-      (commentToCompare) => commentToCompare !== comment,
-    );
+    // POSTS[postId].comments = POSTS[postId].comments.filter(
+    //   (commentToCompare) => commentToCompare !== comment,
+    // );
   };
 
   return (
     <Container>
-      <Avatar avatarUrl={comment.owner.avatarUrl} />
+      <Avatar avatarUrl={comment.owner.avatar} />
 
       <CommentContainer>
         <Content>
           <ContentHeader>
             <div>
-              <Link to={`../profile/${comment.owner.name}`}>
+              <Link to={`../profile/${comment.owner.id}`}>
                 <strong>{comment.owner.name}</strong>
               </Link>
 

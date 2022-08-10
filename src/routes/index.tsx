@@ -13,7 +13,7 @@ const AppRoutes: React.FC = () => {
   return (
     <Switch>
       <Route path="/" exact component={Dashboard} isPrivate />
-      <Route path="/profile/:username" exact component={ProfilePage} isPrivate />
+      <Route path="/profile/:id" exact component={ProfilePage} isPrivate />
       <Route path="/tags/:tag" exact component={Tags} isPrivate />
       <Route path="/login" exact component={Login} />
       <Route path="/new-account" exact component={CreateAcount} />

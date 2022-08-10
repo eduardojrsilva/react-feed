@@ -28,7 +28,7 @@ const Header: React.FC = () => {
         </button>
 
         <MenuMobile type="button" onClick={handleMenuClick}>
-          <Avatar avatarUrl={user.avatarUrl} menuMobile />
+          <Avatar avatarUrl={user.avatar} menuMobile />
         </MenuMobile>
 
         {isMenuOpen && (

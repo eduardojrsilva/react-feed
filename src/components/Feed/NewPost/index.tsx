@@ -5,7 +5,6 @@ import BagOfWords from '../../BagOfWords';
 import { Input } from '../../Input/styles';
 import { TextArea } from '../../TextArea/styles';
 
-import { POSTS } from '../../../utils/Mocks';
 import { useAuth } from '../../../providers/Auth';
 
 import { Post } from '../../../model/Post';
@@ -37,7 +36,7 @@ const NewPost: React.FC<NewPostProps> = ({ profile = false }) => {
       comments: [],
     };
 
-    POSTS.unshift(post);
+    // add post
 
     setPostContent('');
     setUrl('');

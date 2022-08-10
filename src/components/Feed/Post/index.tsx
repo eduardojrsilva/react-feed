@@ -9,7 +9,6 @@ import Avatar from '../../Avatar';
 import Comment from '../Comments';
 import { TextArea } from '../../TextArea/styles';
 
-import { POSTS } from '../../../utils/Mocks';
 import { useAuth } from '../../../providers/Auth';
 
 import { Comment as CommentType } from '../../../model/Comment';
@@ -72,7 +71,7 @@ const Post: React.FC<PostProps> = ({ post, linkToProfile = false }) => {
       publishedAt: new Date(Date.now()),
     };
 
-    POSTS[POSTS.indexOf(post)].comments.push(comment);
+    // add comment
 
     setPostComment('');
   };
@@ -81,10 +80,10 @@ const Post: React.FC<PostProps> = ({ post, linkToProfile = false }) => {
     <Container>
       <PostHeader>
         <Identification>
-          <Avatar avatarUrl={post.owner.avatarUrl} />
+          <Avatar avatarUrl={post.owner.avatar} />
           <NameRoleWrapper>
             {linkToProfile ? (
-              <Link to={`../profile/${post.owner.name}`}>
+              <Link to={`../profile/${post.owner.id}`}>
                 <strong>{post.owner.name}</strong>
               </Link>
             ) : (
@@ -158,7 +157,7 @@ const Post: React.FC<PostProps> = ({ post, linkToProfile = false }) => {
             </button>
           )}
           {post.comments.map((comment) => (
-            <Comment comment={comment} postId={POSTS.indexOf(post)} key={comment.id} />
+            <Comment comment={comment} postId={post.id} key={comment.id} />
           ))}
         </CommentsContainer>
       )}
