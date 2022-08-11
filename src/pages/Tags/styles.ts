@@ -17,6 +17,10 @@ export const Container = styled.div`
     font-size: ${convertPixelToRem(18)};
     color: ${theme.colors.gray400};
   }
+
+  > div {
+    width: 100%;
+  }
 `;
 
 export const Title = styled.h1`

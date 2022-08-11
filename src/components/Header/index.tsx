@@ -33,7 +33,7 @@ const Header: React.FC = () => {
 
         {isMenuOpen && (
           <Menu>
-            <Link to={`/profile/${user.name}`} onClick={handleMenuClick}>
+            <Link to={`/profile/${user.id}`} onClick={handleMenuClick}>
               Meu Perfil
             </Link>
             <button type="button" onClick={signOut}>

@@ -93,9 +93,9 @@ const Post: React.FC<PostProps> = ({ post, linkToProfile = false }) => {
           </NameRoleWrapper>
         </Identification>
 
-        {/* <time title={publishedAtDateFormatted} dateTime={post.publishedAt.toString()}>
-          Publicado {publishedAtDistanceToNow} atrás
-        </time> */}
+        <time /* title={publishedAtDateFormatted} dateTime={post.publishedAt.toString()} */>
+          Publicado {/* publishedAtDistanceToNow */} 2 horas atrás
+        </time>
       </PostHeader>
       <PostContent>
         {post.content.split('\n').map((line) => (
