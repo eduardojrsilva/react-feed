@@ -38,11 +38,7 @@ const ProfilePage: React.FC = () => {
   const isMyProfile = user.id === loggedUser.id;
 
   const getUser = useCallback(async () => {
-    const { data } = await api.get<User>('/user', {
-      params: {
-        id,
-      },
-    });
+    const { data } = await api.get<User>(`/user/${id}`);
 
     setUser(data);
   }, [id]);

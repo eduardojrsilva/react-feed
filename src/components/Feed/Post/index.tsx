@@ -38,14 +38,14 @@ const Post: React.FC<PostProps> = ({ post, linkToProfile = false }) => {
 
   const { user } = useAuth();
 
-  const publishedAtDateFormatted = format(post.publishedAt, "d 'de' LLLL 'às' HH:mm", {
-    locale: pt,
-  });
+  // const publishedAtDateFormatted = format(post.publishedAt, "d 'de' LLLL 'às' HH:mm", {
+  //   locale: pt,
+  // });
 
-  const publishedAtDistanceToNow = formatDistanceToNow(post.publishedAt, {
-    locale: pt,
-    addSuffix: true,
-  });
+  // const publishedAtDistanceToNow = formatDistanceToNow(post.publishedAt, {
+  //   locale: pt,
+  //   addSuffix: true,
+  // });
 
   const handleLike = (): void => {
     // eslint-disable-next-line no-param-reassign
@@ -93,12 +93,12 @@ const Post: React.FC<PostProps> = ({ post, linkToProfile = false }) => {
           </NameRoleWrapper>
         </Identification>
 
-        <time title={publishedAtDateFormatted} dateTime={post.publishedAt.toString()}>
+        {/* <time title={publishedAtDateFormatted} dateTime={post.publishedAt.toString()}>
           Publicado {publishedAtDistanceToNow} atrás
-        </time>
+        </time> */}
       </PostHeader>
       <PostContent>
-        {post.content.map((line) => (
+        {post.content.split('\n').map((line) => (
           <div key={`${post.id}-${line}`}>
             <span>{line}</span>
             <br />
@@ -138,7 +138,7 @@ const Post: React.FC<PostProps> = ({ post, linkToProfile = false }) => {
             <FiMessageCircle />
           </button>
 
-          <span>{post.comments.length}</span>
+          <span>{post.comments?.length}</span>
         </div>
       </InteractionsBar>
 
