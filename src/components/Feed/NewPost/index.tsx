@@ -1,13 +1,12 @@
-import { ChangeEvent, useState } from 'react';
-import { v4 as uuid } from 'uuid';
+import { ChangeEvent, useCallback, useState } from 'react';
 
 import BagOfWords from '../../BagOfWords';
 import { Input } from '../../Input/styles';
 import { TextArea } from '../../TextArea/styles';
 
 import { useAuth } from '../../../providers/Auth';
-
-import { Post } from '../../../model/Post';
+import { useToast } from '../../../providers/Toast';
+import api from '../../../services/api';
 
 import { Button, ButtonsContainer, Container, InputWrapper } from './styles';
 
@@ -23,27 +22,30 @@ const NewPost: React.FC<NewPostProps> = ({ profile = false }) => {
   const [tags, setTags] = useState<string[]>([]);
 
   const { user } = useAuth();
+  const { addToast } = useToast();
 
-  const handlePublish = (): void => {
-    const post: Post = {
-      id: uuid(),
-      owner: user,
-      publishedAt: new Date(Date.now()),
-      content: postContent.split('\n'),
-      link: url,
-      tags,
-      likesCount: 0,
-      comments: [],
-    };
+  const handlePublish = useCallback(async () => {
+    try {
+      await api.post('post', {
+        id_owner: user.id,
+        content: postContent,
+        link: url,
+        tags,
+      });
 
-    // add post
-
-    setPostContent('');
-    setUrl('');
-    setTags([]);
-    setIsUrlOn(false);
-    setIsTagsOn(false);
-  };
+      setPostContent('');
+      setUrl('');
+      setTags([]);
+      setIsUrlOn(false);
+      setIsTagsOn(false);
+    } catch {
+      addToast({
+        title: 'Erro',
+        description: 'Erro ao publicar post',
+        type: 'error',
+      });
+    }
+  }, [addToast, user.id, postContent, url, tags]);
 
   const handleChangePostContent = (event: ChangeEvent<HTMLTextAreaElement>): void => {
     setPostContent(event.target.value);
