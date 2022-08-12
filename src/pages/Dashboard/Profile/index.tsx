@@ -1,6 +1,6 @@
-import Avatar from '../Avatar';
+import Avatar from '../../../components/Avatar';
 
-import { User } from '../../model/User';
+import { User } from '../../../model/User';
 
 import { Container, Content, StyledLink, ViewProfileContainer, Wallpaper } from './styles';
 

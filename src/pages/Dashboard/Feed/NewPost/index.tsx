@@ -1,12 +1,12 @@
 import { ChangeEvent, useCallback, useState } from 'react';
 
-import BagOfWords from '../../BagOfWords';
-import { Input } from '../../Input/styles';
-import { TextArea } from '../../TextArea/styles';
+import BagOfWords from '../../../../components/BagOfWords';
+import { Input } from '../../../../components/Input/styles';
+import { TextArea } from '../../../../components/TextArea/styles';
 
-import { useAuth } from '../../../providers/Auth';
-import { useToast } from '../../../providers/Toast';
-import api from '../../../services/api';
+import { useAuth } from '../../../../providers/Auth';
+import { useToast } from '../../../../providers/Toast';
+import api from '../../../../services/api';
 
 import { Button, ButtonsContainer, Container, InputWrapper } from './styles';
 

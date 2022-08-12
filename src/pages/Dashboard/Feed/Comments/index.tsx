@@ -4,11 +4,11 @@ import { format, formatDistanceToNow } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import { FiThumbsUp, FiTrash2 } from 'react-icons/fi';
 
-import Avatar from '../../Avatar';
+import Avatar from '../../../../components/Avatar';
 
-import { useAuth } from '../../../providers/Auth';
+import { useAuth } from '../../../../providers/Auth';
 
-import { Comment as CommentType } from '../../../model/Comment';
+import { Comment as CommentType } from '../../../../model/Comment';
 
 import { CommentContainer, Container, Content, ContentHeader, LikeContainer } from './styles';
 

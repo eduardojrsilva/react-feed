@@ -3,8 +3,8 @@ import { useParams } from 'react-router-dom';
 import { FiEdit } from 'react-icons/fi';
 
 import Avatar from '../../components/Avatar';
-import NewPost from '../../components/Feed/NewPost';
-import Post from '../../components/Feed/Post';
+import NewPost from '../Dashboard/Feed/NewPost';
+import Post from '../Dashboard/Feed/Post';
 import PageWrapper from '../../components/PageWrapper';
 import EditUserInfo from './EditUserInfo';
 

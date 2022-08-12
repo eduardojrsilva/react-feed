@@ -4,14 +4,14 @@ import { format, formatDistanceToNow } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import { FiMessageCircle, FiThumbsUp } from 'react-icons/fi';
 
-import Avatar from '../../Avatar';
+import Avatar from '../../../../components/Avatar';
 import Comment from '../Comments';
-import { TextArea } from '../../TextArea/styles';
+import { TextArea } from '../../../../components/TextArea/styles';
 
-import { useToast } from '../../../providers/Toast';
-import api from '../../../services/api';
+import { useToast } from '../../../../providers/Toast';
+import api from '../../../../services/api';
 
-import { Post as PostType } from '../../../model/Post';
+import { Post as PostType } from '../../../../model/Post';
 
 import {
   CommentsContainer,

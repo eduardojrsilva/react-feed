@@ -1,6 +1,6 @@
-import Feed from '../../components/Feed';
+import Feed from './Feed';
 import PageWrapper from '../../components/PageWrapper';
-import Profile from '../../components/Profile';
+import Profile from './Profile';
 
 import { useAuth } from '../../providers/Auth';
 

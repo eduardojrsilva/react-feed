@@ -3,12 +3,12 @@ import { useCallback, useEffect, useState } from 'react';
 import NewPost from './NewPost';
 import Post from './Post';
 
-import { useAuth } from '../../providers/Auth';
+import { useAuth } from '../../../providers/Auth';
 
-import { Post as PostType } from '../../model/Post';
+import { Post as PostType } from '../../../model/Post';
 
 import { Container } from './styles';
-import api from '../../services/api';
+import api from '../../../services/api';
 
 const Feed: React.FC = () => {
   const [posts, setPosts] = useState<PostType[]>([]);

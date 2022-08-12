@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import Post from '../../components/Feed/Post';
+import Post from '../Dashboard/Feed/Post';
 import PageWrapper from '../../components/PageWrapper';
 
 import { Post as PostType } from '../../model/Post';
