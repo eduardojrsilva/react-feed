@@ -5,9 +5,9 @@ export interface Post {
   id: string;
   owner: User;
   content: string;
-  publishedAt: Date;
+  published_at: string;
   link?: string;
   tags?: string[];
-  likesCount: number;
+  likes_count: number;
   comments: Comment[];
 }

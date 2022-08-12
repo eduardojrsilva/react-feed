@@ -1,17 +1,16 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useCallback, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { format, formatDistanceToNow } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import { FiMessageCircle, FiThumbsUp } from 'react-icons/fi';
-import { v4 as uuid } from 'uuid';
 
 import Avatar from '../../Avatar';
 import Comment from '../Comments';
 import { TextArea } from '../../TextArea/styles';
 
-import { useAuth } from '../../../providers/Auth';
+import { useToast } from '../../../providers/Toast';
+import api from '../../../services/api';
 
-import { Comment as CommentType } from '../../../model/Comment';
 import { Post as PostType } from '../../../model/Post';
 
 import {
@@ -36,20 +35,20 @@ const Post: React.FC<PostProps> = ({ post, linkToProfile = false }) => {
   const [activeComment, setActiveComment] = useState(false);
   const [postComment, setPostComment] = useState('');
 
-  const { user } = useAuth();
+  const { addToast } = useToast();
 
-  // const publishedAtDateFormatted = format(post.publishedAt, "d 'de' LLLL 'às' HH:mm", {
-  //   locale: pt,
-  // });
+  const publishedAtDateFormatted = format(Date.parse(post.published_at), "d 'de' LLLL 'às' HH:mm", {
+    locale: pt,
+  });
 
-  // const publishedAtDistanceToNow = formatDistanceToNow(post.publishedAt, {
-  //   locale: pt,
-  //   addSuffix: true,
-  // });
+  const publishedAtDistanceToNow = formatDistanceToNow(Date.parse(post.published_at), {
+    locale: pt,
+    addSuffix: true,
+  });
 
   const handleLike = (): void => {
     // eslint-disable-next-line no-param-reassign
-    post.likesCount += activeLike ? -1 : 1;
+    post.likes_count += activeLike ? -1 : 1;
 
     setActiveLike(!activeLike);
   };
@@ -62,19 +61,22 @@ const Post: React.FC<PostProps> = ({ post, linkToProfile = false }) => {
     setPostComment(event.target.value);
   };
 
-  const handleComment = (): void => {
-    const comment: CommentType = {
-      id: uuid(),
-      owner: user,
-      message: postComment.split('\n'),
-      likesCount: 0,
-      publishedAt: new Date(Date.now()),
-    };
+  const handleComment = useCallback(async () => {
+    try {
+      await api.post('comment', {
+        id_post: post.id,
+        message: postComment,
+      });
 
-    // add comment
-
-    setPostComment('');
-  };
+      setPostComment('');
+    } catch {
+      addToast({
+        title: 'Erro',
+        description: 'Erro ao adicionar comentário',
+        type: 'error',
+      });
+    }
+  }, [addToast, post.id, postComment]);
 
   return (
     <Container>
@@ -93,8 +95,8 @@ const Post: React.FC<PostProps> = ({ post, linkToProfile = false }) => {
           </NameRoleWrapper>
         </Identification>
 
-        <time /* title={publishedAtDateFormatted} dateTime={post.publishedAt.toString()} */>
-          Publicado {/* publishedAtDistanceToNow */} 2 horas atrás
+        <time title={publishedAtDateFormatted} dateTime={post.published_at.toString()}>
+          Publicado {publishedAtDistanceToNow} atrás
         </time>
       </PostHeader>
       <PostContent>
@@ -131,7 +133,7 @@ const Post: React.FC<PostProps> = ({ post, linkToProfile = false }) => {
             <FiThumbsUp />
           </button>
 
-          <span>{post.likesCount}</span>
+          <span>{post.likes_count}</span>
         </div>
         <div>
           <button type="button" onClick={handleOpenCloseComment}>
@@ -157,7 +159,7 @@ const Post: React.FC<PostProps> = ({ post, linkToProfile = false }) => {
             </button>
           )}
           {post.comments.map((comment) => (
-            <Comment comment={comment} postId={post.id} key={comment.id} />
+            <Comment comment={comment} key={comment.id} />
           ))}
         </CommentsContainer>
       )}

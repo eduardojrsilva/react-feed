@@ -14,26 +14,29 @@ import { CommentContainer, Container, Content, ContentHeader, LikeContainer } fr
 
 interface CommentProps {
   comment: CommentType;
-  postId: string;
 }
 
-const Comment: React.FC<CommentProps> = ({ comment, postId }) => {
+const Comment: React.FC<CommentProps> = ({ comment }) => {
   const [activeLike, setActiveLike] = useState(false);
 
   const { user } = useAuth();
 
-  const publishedAtDateFormatted = format(comment.publishedAt, "d 'de' LLLL 'às' HH:mm", {
-    locale: pt,
-  });
+  const publishedAtDateFormatted = format(
+    Date.parse(comment.published_at),
+    "d 'de' LLLL 'às' HH:mm",
+    {
+      locale: pt,
+    },
+  );
 
-  const publishedAtDistanceToNow = formatDistanceToNow(comment.publishedAt, {
+  const publishedAtDistanceToNow = formatDistanceToNow(Date.parse(comment.published_at), {
     locale: pt,
     addSuffix: true,
   });
 
   const handleLike = (): void => {
     // eslint-disable-next-line no-param-reassign
-    comment.likesCount += activeLike ? -1 : 1;
+    comment.likes_count += activeLike ? -1 : 1;
 
     setActiveLike(!activeLike);
   };
@@ -56,7 +59,7 @@ const Comment: React.FC<CommentProps> = ({ comment, postId }) => {
                 <strong>{comment.owner.name}</strong>
               </Link>
 
-              <time title={publishedAtDateFormatted} dateTime={comment.publishedAt.toString()}>
+              <time title={publishedAtDateFormatted} dateTime={comment.published_at.toString()}>
                 {publishedAtDistanceToNow} atrás
               </time>
             </div>
@@ -68,7 +71,7 @@ const Comment: React.FC<CommentProps> = ({ comment, postId }) => {
             )}
           </ContentHeader>
 
-          {comment.message.map((line) => (
+          {comment.message.split('\n').map((line) => (
             <div key={`${comment.id}-${line}`}>
               <span>{line}</span>
               <br />
@@ -80,7 +83,7 @@ const Comment: React.FC<CommentProps> = ({ comment, postId }) => {
           <button type="button" onClick={handleLike}>
             <FiThumbsUp />
           </button>
-          <span>{comment.likesCount}</span>
+          <span>{comment.likes_count}</span>
         </LikeContainer>
       </CommentContainer>
     </Container>
