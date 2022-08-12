@@ -9,6 +9,7 @@ import Comment from '../Comments';
 import { TextArea } from '../../../../components/TextArea/styles';
 
 import { useToast } from '../../../../providers/Toast';
+import { useAuth } from '../../../../providers/Auth';
 import api from '../../../../services/api';
 
 import { Post as PostType } from '../../../../model/Post';
@@ -31,11 +32,15 @@ interface PostProps {
 }
 
 const Post: React.FC<PostProps> = ({ post, linkToProfile = false }) => {
-  const [activeLike, setActiveLike] = useState(false);
   const [activeComment, setActiveComment] = useState(false);
   const [postComment, setPostComment] = useState('');
 
   const { addToast } = useToast();
+  const { user } = useAuth();
+
+  const [activeLike, setActiveLike] = useState(
+    post.likes.some((like) => like.owner.id === user.id),
+  );
 
   const publishedAtDateFormatted = format(Date.parse(post.published_at), "d 'de' LLLL 'às' HH:mm", {
     locale: pt,
@@ -46,12 +51,24 @@ const Post: React.FC<PostProps> = ({ post, linkToProfile = false }) => {
     addSuffix: true,
   });
 
-  const handleLike = (): void => {
-    // eslint-disable-next-line no-param-reassign
-    post.likes_count += activeLike ? -1 : 1;
+  const handleLike = useCallback(async () => {
+    try {
+      await api.post('post/like', {
+        id_post: post.id,
+      });
 
-    setActiveLike(!activeLike);
-  };
+      // eslint-disable-next-line no-param-reassign
+      post.likes.length += activeLike ? -1 : 1;
+
+      setActiveLike(!activeLike);
+    } catch {
+      addToast({
+        title: 'Erro',
+        description: 'Erro ao dar like no post',
+        type: 'error',
+      });
+    }
+  }, [addToast, post.id, post.likes, activeLike]);
 
   const handleOpenCloseComment = (): void => {
     setActiveComment(!activeComment);
@@ -133,7 +150,7 @@ const Post: React.FC<PostProps> = ({ post, linkToProfile = false }) => {
             <FiThumbsUp />
           </button>
 
-          <span>{post.likes_count}</span>
+          <span>{post.likes.length}</span>
         </div>
         <div>
           <button type="button" onClick={handleOpenCloseComment}>
