@@ -1,3 +1,4 @@
+import { Like } from './Like';
 import { User } from './User';
 
 export interface Comment {
@@ -5,5 +6,5 @@ export interface Comment {
   owner: User;
   message: string;
   published_at: string;
-  likes_count: number;
+  likes: Like[];
 }

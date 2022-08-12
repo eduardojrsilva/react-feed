@@ -3,8 +3,6 @@ import { useCallback, useEffect, useState } from 'react';
 import NewPost from './NewPost';
 import Post from './Post';
 
-import { useAuth } from '../../../providers/Auth';
-
 import { Post as PostType } from '../../../model/Post';
 
 import { Container } from './styles';
@@ -12,8 +10,6 @@ import api from '../../../services/api';
 
 const Feed: React.FC = () => {
   const [posts, setPosts] = useState<PostType[]>([]);
-
-  const { user } = useAuth();
 
   const getPosts = useCallback(async () => {
     const { data } = await api.get<PostType[]>('/post/feed');
@@ -29,11 +25,9 @@ const Feed: React.FC = () => {
   return (
     <Container>
       <NewPost />
-      {posts
-        .filter((post) => post.owner !== user)
-        .map((post) => (
-          <Post post={post} linkToProfile key={post.id} />
-        ))}
+      {posts.map((post) => (
+        <Post post={post} linkToProfile key={post.id} />
+      ))}
     </Container>
   );
 };

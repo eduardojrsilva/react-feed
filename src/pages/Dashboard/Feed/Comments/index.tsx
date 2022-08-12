@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { format, formatDistanceToNow } from 'date-fns';
 import pt from 'date-fns/locale/pt';
@@ -7,6 +7,8 @@ import { FiThumbsUp, FiTrash2 } from 'react-icons/fi';
 import Avatar from '../../../../components/Avatar';
 
 import { useAuth } from '../../../../providers/Auth';
+import { useToast } from '../../../../providers/Toast';
+import api from '../../../../services/api';
 
 import { Comment as CommentType } from '../../../../model/Comment';
 
@@ -17,9 +19,12 @@ interface CommentProps {
 }
 
 const Comment: React.FC<CommentProps> = ({ comment }) => {
-  const [activeLike, setActiveLike] = useState(false);
-
   const { user } = useAuth();
+  const { addToast } = useToast();
+
+  const [activeLike, setActiveLike] = useState(
+    comment.likes.some((like) => like.owner.id === user.id),
+  );
 
   const publishedAtDateFormatted = format(
     Date.parse(comment.published_at),
@@ -34,12 +39,24 @@ const Comment: React.FC<CommentProps> = ({ comment }) => {
     addSuffix: true,
   });
 
-  const handleLike = (): void => {
-    // eslint-disable-next-line no-param-reassign
-    comment.likes_count += activeLike ? -1 : 1;
+  const handleLike = useCallback(async () => {
+    try {
+      await api.post('comment/like', {
+        id_comment: comment.id,
+      });
 
-    setActiveLike(!activeLike);
-  };
+      // eslint-disable-next-line no-param-reassign
+      comment.likes.length += activeLike ? -1 : 1;
+
+      setActiveLike(!activeLike);
+    } catch {
+      addToast({
+        title: 'Erro',
+        description: 'Erro ao dar like no comentário',
+        type: 'error',
+      });
+    }
+  }, [addToast, comment.id, comment.likes, activeLike]);
 
   const handleDeleteComment = (): void => {
     // POSTS[postId].comments = POSTS[postId].comments.filter(
@@ -64,7 +81,7 @@ const Comment: React.FC<CommentProps> = ({ comment }) => {
               </time>
             </div>
 
-            {user === comment.owner && (
+            {user.id === comment.owner.id && (
               <button type="button" onClick={handleDeleteComment}>
                 <FiTrash2 />
               </button>
@@ -83,7 +100,7 @@ const Comment: React.FC<CommentProps> = ({ comment }) => {
           <button type="button" onClick={handleLike}>
             <FiThumbsUp />
           </button>
-          <span>{comment.likes_count}</span>
+          <span>{comment.likes.length}</span>
         </LikeContainer>
       </CommentContainer>
     </Container>
