@@ -58,11 +58,23 @@ const Comment: React.FC<CommentProps> = ({ comment }) => {
     }
   }, [addToast, comment.id, comment.likes, activeLike]);
 
-  const handleDeleteComment = (): void => {
-    // POSTS[postId].comments = POSTS[postId].comments.filter(
-    //   (commentToCompare) => commentToCompare !== comment,
-    // );
-  };
+  const handleDeleteComment = useCallback(async () => {
+    try {
+      await api.delete(`comment/remove/${comment.id}`);
+
+      addToast({
+        title: 'Sucesso',
+        description: 'Comentário removido com sucesso',
+        type: 'success',
+      });
+    } catch {
+      addToast({
+        title: 'Erro',
+        description: 'Erro ao remover comentário',
+        type: 'error',
+      });
+    }
+  }, [addToast, comment.id]);
 
   return (
     <Container>
