@@ -1,5 +1,5 @@
 import { ChangeEvent, FormEvent, useCallback, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { useToast } from '../../providers/Toast';
 import api from '../../services/api';
@@ -24,6 +24,7 @@ const CreateAcount: React.FC = () => {
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
 
   const { addToast } = useToast();
+  const history = useHistory();
 
   const handleSubmit = useCallback(
     async (event: FormEvent<HTMLFormElement>) => {
@@ -38,6 +39,14 @@ const CreateAcount: React.FC = () => {
           password,
           passwordConfirmation,
         });
+
+        addToast({
+          title: 'Sucesso',
+          description: 'Sua conta foi criada com sucesso',
+          type: 'success',
+        });
+
+        history.push('/login');
       } catch {
         addToast({
           title: 'Erro',
@@ -48,7 +57,7 @@ const CreateAcount: React.FC = () => {
         setIsLoaderOn(false);
       }
     },
-    [addToast, email, name, role, password, passwordConfirmation],
+    [addToast, email, name, role, password, passwordConfirmation, history],
   );
 
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>): void => {
