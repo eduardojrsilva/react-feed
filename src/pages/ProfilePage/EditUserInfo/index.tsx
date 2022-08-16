@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useCallback, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { Input } from '../../../components/Input/styles';
@@ -8,6 +8,7 @@ import { useToast } from '../../../providers/Toast';
 import { User } from '../../../model/User';
 
 import { ButtonsContainer, EditInfo, LabelInputWrapper, NameRoleWrapper } from './styles';
+import api from '../../../services/api';
 
 interface EditUserInfoProps {
   user: User;
@@ -39,18 +40,31 @@ const EditUserInfo: React.FC<EditUserInfoProps> = ({ user, handleEditMode }) => 
     setWallpaper(event.target.value);
   };
 
-  const handleSaveChanges = (): void => {
-    // edit user
+  const handleSaveChanges = useCallback(async () => {
+    try {
+      await api.put('/user/update', {
+        name,
+        role,
+        avatar,
+        wallpaper,
+      });
 
-    addToast({
-      title: 'Sucesso',
-      description: 'Seus dados foram alterados com sucesso!',
-      type: 'success',
-    });
+      addToast({
+        title: 'Dados atualizados com sucesso',
+        description: 'Atualize a página para visualizar as mudanças',
+        type: 'success',
+      });
 
-    handleEditMode();
-    history.push(`/profile/${name}`);
-  };
+      handleEditMode();
+      history.push(`/profile/${user.id}`);
+    } catch {
+      addToast({
+        title: 'Erro',
+        description: 'Erro ao atualizar dados!',
+        type: 'error',
+      });
+    }
+  }, [addToast, history, handleEditMode, user.id, name, role, avatar, wallpaper]);
 
   return (
     <EditInfo>
