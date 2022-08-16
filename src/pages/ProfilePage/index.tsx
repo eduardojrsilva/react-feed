@@ -53,6 +53,7 @@ const ProfilePage: React.FC = () => {
 
   useEffect(() => {
     getUser();
+    window.scrollTo({ top: 0 });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
