@@ -5,7 +5,6 @@ import { useToast } from '../../providers/Toast';
 import api from '../../services/api';
 
 import { Input } from '../../components/Input/styles';
-import { Space } from '../../components/Space/styles';
 
 import {
   Button,
