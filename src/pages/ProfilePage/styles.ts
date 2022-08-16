@@ -107,13 +107,6 @@ export const UserPosts = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
-  border-top: 1px solid ${theme.colors.gray600};
-
-  > strong {
-    display: block;
-    margin-top: 30px;
-    font-size: ${convertPixelToRem(20)};
-  }
 `;
 
 export const Separator = styled.hr`
@@ -127,4 +120,9 @@ export const Warning = styled.div`
   color: ${theme.colors.gray100};
   font-size: ${convertPixelToRem(32)};
   font-weight: 700;
+`;
+
+export const StyledTime = styled.time`
+  font-size: 14px;
+  color: ${theme.colors.gray400};
 `;

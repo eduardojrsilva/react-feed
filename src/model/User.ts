@@ -1,3 +1,4 @@
+import { Like } from './Like';
 import { Post } from './Post';
 
 export interface User {
@@ -7,4 +8,5 @@ export interface User {
   avatar: string;
   wallpaper: string;
   posts: Post[];
+  likes: Like[];
 }

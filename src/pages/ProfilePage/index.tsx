@@ -1,11 +1,15 @@
+/* eslint-disable no-nested-ternary */
 import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { FiEdit } from 'react-icons/fi';
+import { format, formatDistanceToNow } from 'date-fns';
+import pt from 'date-fns/locale/pt';
 
 import Avatar from '../../components/Avatar';
 import NewPost from '../Dashboard/Feed/NewPost';
 import Post from '../Dashboard/Feed/Post';
 import PageWrapper from '../../components/PageWrapper';
+import MenuTab from '../../components/MenuTab';
 import EditUserInfo from './EditUserInfo';
 
 import { useAuth } from '../../providers/Auth';
@@ -17,6 +21,7 @@ import {
   AvatarNameRoleWrapper,
   Container,
   Separator,
+  StyledTime,
   UserInfo,
   UserPosts,
   Wallpaper,
@@ -28,9 +33,12 @@ interface Params {
   id: string;
 }
 
+export type PostType = 'userPosts' | 'likedPosts';
+
 const ProfilePage: React.FC = () => {
   const [user, setUser] = useState<User>({} as User);
   const [editMode, setEditMode] = useState(false);
+  const [postType, setpostType] = useState<PostType>('userPosts');
 
   const { user: loggedUser } = useAuth();
   const { id }: Params = useParams();
@@ -46,10 +54,27 @@ const ProfilePage: React.FC = () => {
   useEffect(() => {
     getUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [id]);
+
+  const likedAtDateFormatted = (date: string): string => {
+    return format(Date.parse(date), "d 'de' LLLL 'às' HH:mm", {
+      locale: pt,
+    });
+  };
+
+  const likedAtDistanceToNow = (date: string): string => {
+    return formatDistanceToNow(Date.parse(date), {
+      locale: pt,
+      addSuffix: true,
+    });
+  };
 
   const handleEditMode = (): void => {
     setEditMode(!editMode);
+  };
+
+  const handleChangePostType = (type: PostType): void => {
+    setpostType(type);
   };
 
   if (!user) {
@@ -86,20 +111,50 @@ const ProfilePage: React.FC = () => {
             <>
               {isMyProfile && <NewPost profile />}
 
-              {!user.posts?.length ? (
+              <MenuTab
+                username={user.name}
+                postType={postType}
+                isMyProfile={isMyProfile}
+                changePostType={handleChangePostType}
+              />
+
+              {postType === 'userPosts' ? (
+                !user.posts?.length ? (
+                  <span>
+                    {isMyProfile
+                      ? 'Você ainda não tem nenhuma publicação'
+                      : `${user.name} ainda não tem nenhuma publicação`}
+                  </span>
+                ) : (
+                  <UserPosts>
+                    {user.posts.map((post, index) => (
+                      <div key={post.id}>
+                        <Post post={post} />
+                        {user.posts.length !== index + 1 && <Separator />}
+                      </div>
+                    ))}
+                  </UserPosts>
+                )
+              ) : !user.likes?.length ? (
                 <span>
                   {isMyProfile
-                    ? 'Você ainda não tem nenhuma publicação'
-                    : `${user.name} ainda não tem nenhuma publicação`}
+                    ? 'Você ainda não curtiu nenhuma publicação'
+                    : `${user.name} ainda não curtiu nenhuma publicação`}
                 </span>
               ) : (
                 <UserPosts>
-                  <strong>{isMyProfile ? 'Suas postagens:' : `Postagens de ${user.name}:`}</strong>
+                  {user.likes?.map((like, index) => (
+                    <div key={like.id}>
+                      <StyledTime
+                        title={likedAtDateFormatted(like.liked_at)}
+                        dateTime={like.liked_at}
+                      >
+                        Curtido {likedAtDistanceToNow(like.liked_at)} atrás
+                      </StyledTime>
 
-                  {user.posts.map((post, index) => (
-                    <div key={post.id}>
-                      <Post post={post} />
-                      {user.posts.length !== index + 1 && <Separator />}
+                      <Post post={like.post} linkToProfile={like.owner?.id !== loggedUser.id} />
+
+                      {user.likes.length !== index + 1 && <Separator />}
                     </div>
                   ))}
                 </UserPosts>
