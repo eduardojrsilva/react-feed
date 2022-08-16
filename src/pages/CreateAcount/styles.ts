@@ -13,6 +13,7 @@ export const Container = styled.div`
 
   > a {
     color: ${({ theme }) => theme.colors.green500};
+    padding-bottom: ${convertPixelToRem(10)};
 
     :hover {
       color: ${({ theme }) => theme.colors.green300};

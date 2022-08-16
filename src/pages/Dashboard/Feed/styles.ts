@@ -8,7 +8,7 @@ export const Container = styled.div`
   flex-direction: column;
   flex: 1;
   gap: 20px;
-  height: calc(100vh - ${convertPixelToRem(110)});
+  height: calc(100vh - ${convertPixelToRem(120)});
   overflow-y: auto;
 
   ${getScrollbarStyle({
